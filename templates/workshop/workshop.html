@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Agenda</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        .card {
+            margin-bottom: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-icon {
+            font-size: 40px;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+
+        .contact-links {
+            margin-top: 20px;
+        }
+
+        .contact-links a {
+            text-decoration: none;
+            color: white;
+            margin: 0 10px;
+        }
+
+
+
+        header {
+            /* background-color: #f0f0f0; */
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: white;
+            margin: 0;
+        }
+
+        p {
+            color: #555;
+        }
+
+        .pro_card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pro_card img {
+            margin-right: 10px;
+        }
+
+        .pro_card span {
+            color: #009688;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .explore {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .explore strong {
+            padding: 10px;
+            border: 1px solid #009688;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            background-color: #009688;
+            gap: 10px;
+        }
+
+        .explore strong:hover {
+            background-color: #009688;
+            color: #fff;
+        }
+
+        .img img {
+            width: 100%;
+            height: 500px;
+        }
+
+        .cptn {
+            margin-top: 150px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Workshop Platform</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Workshops</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="position: relative;">
+                <img src="{{ url_for('static', filename='assets/images/hack1.jpg') }}" alt="Image 1"
+                    style="width: 100%; height: 300px;">
+                <a href="{{ url_for('hackathons') }}"
+                    style="position: absolute; top: 80%; left: 90%; transform: translate(-50%, -50%); background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%); border: 2px dotted orange; ">
+                    <button class="btn btn-primary " style="border-radius: 8px;">Join Contest</button>
+                </a>
+            </div>
+
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='assets/images/hack2.jpg') }}" alt="Image 1"
+                    style="width: 100%; height:300px;">
+                <a href="{{ url_for('hackathons') }}"
+                    style="position: absolute; top: 80%; left: 90%; transform: translate(-50%, -50%); background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%); border: 2px dotted orange; ">
+                    <button class="btn btn-primary">Join Contest</button>
+                </a>
+
+            </div>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='assets/images/hack3.jpg') }}" alt="Image 1"
+                    style="width: 100%; height:300px;">
+                <a href="{{ url_for('hackathons') }}"
+                    style="position: absolute; top: 80%; left: 90%; transform: translate(-50%, -50%); background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%); border: 2px dotted orange; ">
+                    <button class="btn btn-primary">Join Contest</button>
+                </a>
+
+            </div>
+            <!-- <div class="carousel-item">
+                <img src="{{ url_for('static', filename='assets/images/about-banner.jpg') }}" alt="Image 1"style="width: 100%; height:300px;">
+
+            </div>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='assets/images/about-banner.jpg') }}" alt="Image 1"style="width: 100%; height:300px;">
+
+            </div> -->
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card workshop-card">
+                        <img src="{{ url_for('static', filename='/assets/images/event-1.jpg') }}" class="card-img-top"
+                            alt="Workshop Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Web Development Workshop</h5>
+                            <p class="card-text">Learn the basics of web development with HTML, CSS, and JavaScript.</p>
+                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                            <a href="#" class="btn btn-info">Price: $99</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card workshop-card">
+                        <img src="{{ url_for('static', filename='/assets/images/event-2.jpg') }}" class="card-img-top"
+                            alt="Workshop Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Data Science Workshop</h5>
+                            <p class="card-text">Explore the world of data science and machine learning.</p>
+                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                            <a href="#" class="btn btn-info">Price: $129</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card workshop-card">
+                        <img src="{{ url_for('static', filename='/assets/images/event-3.jpg') }}" class="card-img-top"
+                            alt="Workshop Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Cybersecurity Workshop</h5>
+                            <p class="card-text">Enhance your skills in cybersecurity and ethical hacking.</p>
+                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                            <a href="#" class="btn btn-info">Price: $149</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <header>
+            <div class="un-container" style="display: flex;">
+                <div class="cptn">
+                    <h1 style="color:green;">1-on-1<br>Mentorship</h1>
+                    <p>Book a session with Wikicoding mentors across domains & work together to build your career!</p>
+
+                    <div class="explore">
+                        <div>
+                            <strong routerlink="/find-a-mentor" class="waves-effect" tabindex="0">
+                                <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/6569e74c69a38_find_mentor.svg"
+                                    alt="Find a Mentor" width="26" height="26" loading="lazy">
+                                Find a Mentor
+                            </strong>
+                            <strong routerlink="find-a-match" class="waves-effect" tabindex="0"
+                                style="margin-left: 20px;">
+                                <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/6569e75ce53ba_get_match.svg"
+                                    alt="Get Match" width="26" height="26" loading="lazy">
+                                Mentor Match
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="img">
+                    <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/657a9920d173c_mentorship.png?d=1000x1000"
+                        alt="Mentorship banner" width="590" height="632" loading="lazy">
+                </div>
+            </div>
+        </header>
+        <div class="box" style="background-color:#151515 ;">
+            <header class="main-top2 page-header page-header-orange text-white">
+                <div class="container">
+                    <div class="row justify-content-center text-center">
+                        <div class="col-md-8">
+                            <h1>Get in Touch: Connect with Us | Let's Start the Conversation</h1>
+                            <p>For inquiries or support, contact us anytime</p>
+                            <div class="contact-links">
+                                <a href="mailto:contact@example.com"><i class="fas fa-envelope"></i> Email</a>
+                                <a href="https://www.instagram.com/example"><i class="fab fa-instagram"></i>
+                                    Instagram</a>
+                                <a href="https://www.linkedin.com/in/example"><i class="fab fa-linkedin"></i>
+                                    LinkedIn</a>
+                                <a href="https://github.com/example"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            // Activate the carousel
+            $(document).ready(function () {
+                $('#imageCarousel').carousel();
+
+                // Set interval to change image every 5 seconds
+                setInterval(function () {
+                    $('#imageCarousel').carousel('next');
+                }, 5000);
+            });
+        </script>
+</body>
+
+</html>

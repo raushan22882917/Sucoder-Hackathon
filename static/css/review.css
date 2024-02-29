@@ -1,0 +1,166 @@
+body {
+    background-image: url("{{ url_for('static', filename='assets/images/intern1.jpeg') }}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation-name: imageCycle;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #3498db;
+}
+
+@keyframes imageCycle {
+    0% {
+        background-image: url("{{ url_for('static', filename='assets/images/intern1.jpeg') }}");
+    }
+
+    25% {
+        background-image: url("{{ url_for('static', filename='assets/images/intern2.jpeg') }}");
+    }
+
+    50% {
+        background-image: url("{{ url_for('static', filename='assets/images/intern3.jpeg') }}");
+    }
+
+    100% {
+        background-image: url("{{ url_for('static', filename='assets/images/intern4.jpeg') }}");
+    }
+
+
+}
+
+.search-container {
+    max-width: 600px;
+    margin: auto;
+    margin-top: 150px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    flex: 1;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    outline: none;
+}
+
+.search-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    background-color: #0056b3;
+}
+
+.container {
+    width: 600px;
+    height: 600px;
+    opacity: 0.9;
+    border-radius: 10px;
+}
+
+
+
+
+
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+footer a {
+    color: #ffffff;
+    margin: 0 10px;
+}
+
+.company-card {
+    width: 600px;
+    margin: auto;
+    margin-top: 150px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.company-card img {
+    width: 80px;
+    height: 50px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    margin-left: 300px;
+}
+
+.rating i {
+    color: #ffc107;
+    margin-right: 5px;
+}
+
+.company-info-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.company-info-item {
+    margin-left: 30px;
+}
+
+.company-info-item a {
+    width: 100px;
+    height: 50px;
+    color: rgb(0, 110, 255);
+    text-align: center;
+}
+
+.company-info-item a:hover {
+    background-color: #0056b3;
+}
+
+.companyCardWrapper__companyRatingValue {
+    width: 40px;
+    height: 20px;
+    background-color: greenyellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.companyCardWrapper__ActionCount,
+.companyCardWrapper__ActionTitle {
+    display: block;
+    text-align: center;
+}

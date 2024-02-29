@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Small Projects</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        .card {
+            margin: 10px;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Social media icons */
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        .box {
+            display: flex;
+            width: 100%;
+            height: 300px;
+            /* background-color: red; */
+        }
+
+        .image-container {
+            position: relative;
+            margin-left: 600px;
+        }
+
+        .image-container img {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .image1 {
+            width: 300px;
+            height: 300px;
+            left: 0;
+        }
+
+        .image2 {
+            width: 250px;
+            height: 250px;
+            top: 50px;
+            right: 50px;
+            margin-left: 30px;
+        }
+
+        .image3 {
+            width: 200px;
+            height: 200px;
+            top: 150px;
+            left: 50px;
+        }
+
+        .image4 {
+            width: 100px;
+            height: 100px;
+            bottom: 250px;
+            left: 150px;
+        }
+
+        .h1 {
+            width: 200px;
+            height: 50px;
+            margin: 20px;
+            background-color: white;
+            border-radius: 8px;
+            font-size: 50px;
+            font-weight: 800;
+        }
+
+        .box1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 200px;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <a href="{{ url_for('workshop') }}" class="btn btn-primary">Go back</a>
+    </div>
+
+
+    <div class="box">
+        <div class="box1">
+            <div>
+                <h1 class="h1">Project</h1>
+                <p style="font-size:20px;">Empowering Dreams, One Click at a Time.</p>
+                <!-- User Instruction -->
+                <p style="font-size:16px; color:#666;">To explore our projects, simply click on the "View Project" button below each project card.</p>
+            </div>
+        </div>
+        
+
+
+    </div>
+
+    <div class="container">
+        <div class="row" style="height:400px; overflow:auto;">
+            <div class="col-md-4">
+                <div class="card">
+
+                    <img src="{{ url_for('static', filename='assets/images/titanic.jpeg') }}" class="card-img-top"
+                        alt="Project 1">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Project 1</h5>
+                        <p class="card-text">Description of Project 1.</p>
+                        <a href="{{url_for('titanic')}}" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat the card structure for additional projects -->
+            <!-- You can copy this block and modify the content for each project -->
+            <div class="col-md-4">
+                <div class="card">
+                    <!-- templates/project.html -->
+
+                    <img src="{{ url_for('static', filename='assets/images/pic.jpeg') }}" class="card-img-top"
+                        alt="Project 1">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Project 2</h5>
+                        <p class="card-text">Description of Project 2.</p>
+                        <a href="#" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <!-- templates/project.html -->
+
+                    <img src="{{ url_for('static', filename='assets/images/pic.jpeg') }}" class="card-img-top"
+                        alt="Project 1">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Project 2</h5>
+                        <p class="card-text">Description of Project 2.</p>
+                        <a href="#" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <!-- templates/project.html -->
+
+                    <img src="{{ url_for('static', filename='assets/images/pic.jpeg') }}" class="card-img-top"
+                        alt="Project 1">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Project 2</h5>
+                        <p class="card-text">Description of Project 2.</p>
+                        <a href="#" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <!-- templates/project.html -->
+
+                    <img src="{{ url_for('static', filename='assets/images/pic.jpeg') }}" class="card-img-top"
+                        alt="Project 1">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Project 2</h5>
+                        <p class="card-text">Description of Project 2.</p>
+                        <a href="#" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <!-- templates/project.html -->
+
+                    <img src="{{ url_for('static', filename='assets/images/pic.jpeg') }}" class="card-img-top"
+                        alt="Project 1">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Project 2</h5>
+                        <p class="card-text">Description of Project 2.</p>
+                        <a href="#" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat this block to create more project cards -->
+        </div>
+    </div>
+
+
+    <footer>
+        <h2>Join Us in Shaping the Future of Coding</h2>
+        <p style=" color: white;">Whether you're here to learn, collaborate, or contribute, Wikicoding welcomes you to
+            join our community.
+            Together, let's shape the future of coding and create a space where knowledge knows no bounds.</p>
+        <div class="social-icons">
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"> <i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"> <i class="fab fa-instagram"></i></a>
+
+        </div>
+        <p style=" color: white;">&copy; 2023 Wikicoding. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

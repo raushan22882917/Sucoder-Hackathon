@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .item {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            margin: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out;
+            width: 300px;
+        }
+
+        .item:hover {
+            transform: scale(1.02);
+        }
+
+        .banner {
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+
+        .banner img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .cptn {
+            padding: 20px;
+        }
+
+        .user {
+            display: flex;
+            align-items: center;
+        }
+
+        .user img {
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .icon img {
+            display: block;
+        }
+
+
+
+        h4 {
+            margin: 0;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        .bottom {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .experience,
+        .review {
+            display: flex;
+            align-items: center;
+        }
+
+        .experience img,
+        .review img {
+            margin-right: 5px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            margin-top: 200px;
+            background-color: #007bff;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .button:active {
+            background-color: #004080;
+        }
+
+        #imageContainer {
+            width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .img {
+            width: 86%;
+            margin-left: 6%;
+            margin-right: 7%;
+            height: 200px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="imageContainer">
+        <div style="display: flex;">
+            <div style="height:200px;">
+                <img src="{{ url_for('static', filename='/assets/images/intern5.jpeg') }}" alt="Image 1" class="img">
+            </div>
+
+        </div>
+        <!-- <img src="{{ url_for('static', filename='/assets/images/prof2.jpeg') }}" alt="Image 2" class="img">
+        <img src="{{ url_for('static', filename='/assets/images/prof3.jpeg') }}" alt="Image 3" class="img">
+        <img src="{{ url_for('static', filename='/assets/images/prof4.jpeg') }}" alt="Image 4" class="img"> -->
+    </div>
+    <div style="display :flex;">
+        <div style="margin-left:70px ;">
+            <a class="item" href="/mentor/Kritika">
+                <div class="banner">
+                    <img src="https://cdn.unstop.com/uploads/images/unstop/icons/top_mentor_icon.svg" width="46"
+                        height="46" loading="lazy" alt="Top Mentor Icon">
+
+                    <button class="button">Connect</button>
+                </div>
+                <div class="cptn">
+                    <div class="user">
+                        <img src="https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/64da0c065cfc1.webp"
+                            width="110" height="110" loading="lazy" alt="Kritika Jalan">
+                        <div class="icon">
+                            <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/655b2c549c17f_bolt_1.svg"
+                                alt="Bolt Icon" width="11" height="16" loading="lazy">
+                        </div>
+                    </div>
+                    <h3>Kritika Jalan</h3>
+                    <h4>Bain & Company | XLRI Placement Committee | 10x International/National Case Competition Titles |
+                        Circle | P&G Emerging Leader </h4>
+                    <div class="bottom">
+                        <div class="experience">
+                            <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/655dade4cddeb_business_center.svg"
+                                alt="Experience Icon" height="18" width="18" loading="lazy">
+                            2 Years
+                        </div>
+                        <div class="review">
+                            <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/655dae05097d4_business_center_1.svg"
+                                alt="Reviews Icon" height="18" width="18" loading="lazy">
+                            5
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div>
+            <a class="item" href="/mentor/kashishmalhotra">
+                <div class="banner">
+                    <img src="https://cdn.unstop.com/uploads/images/unstop/icons/top_mentor_icon.svg" width="46"
+                        height="46" loading="lazy" alt="Top Mentor Icon">
+                    <button class="button">Connect</button>
+
+                </div>
+
+                <div class="cptn">
+                    <div class="user">
+                        <img width="110" height="110" loading="lazy" alt="Kashish Malhotra"
+                            src="https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/64737befce4ab.webp">
+
+                    </div>
+                    <h3>Kashish</h3>
+                    <h4>BCG | XLRI Placement Committee | LinkedIn 20k+ Followers | | P&G Emerging
+                        Leader | 10+ Nat'l Case Comps</h4>
+                    <div class="bottom">
+                        <div>
+                            <div class="experience">
+                                <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/655dade4cddeb_business_center.svg"
+                                    alt="Experience Icon" height="18" width="18" loading="lazy">
+                                2 Years
+                            </div>
+                            <div class="review">
+                                <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/655dae05097d4_business_center_1.svg"
+                                    alt="Reviews Icon" height="18" width="18" loading="lazy">
+                                4.9
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div>
+            <a class="item" href="/mentor/arghadas7">
+                <div class="banner">
+                    <img src="https://cdn.unstop.com/uploads/images/unstop/icons/top_mentor_icon.svg" width="46"
+                        height="46" loading="lazy" alt="Top Mentor Icon">
+                    <button class="button">Connect</button>
+
+                </div>
+
+                <div class="cptn">
+                    <div class="user">
+                        <img width="110" height="110" loading="lazy" alt="Argha Das"
+                            src="https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/64f4957510044.webp">
+                        <div class="icon">
+                            <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/655b2c549c17f_bolt_1.svg"
+                                alt="Bolt Icon" width="11" height="16" loading="lazy">
+                        </div>
+                    </div>
+                    <h3>Argha Das</h3>
+                    <h4>Unstop All India Rank #3 B-School Competitive Leader | Dean's List | 17 Corporate, 59 National
+                        B-School
+                        Podiums | 8+ PPIs</h4>
+                    <div class="bottom">
+                        <div>
+                            <div class="experience">
+                                <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/655dade4cddeb_business_center.svg"
+                                    alt="Experience Icon" height="18" width="18" loading="lazy">
+                                1 Year
+                            </div>
+                            <div class="review">
+                                <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/655dae05097d4_business_center_1.svg"
+                                    alt="Reviews Icon" height="18" width="18" loading="lazy">
+                                4.9
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div>
+            <a class="item" href="/mentor/anraj">
+                <div class="banner">
+                    <img src="https://cdn.unstop.com/uploads/images/unstop/icons/top_mentor_icon.svg" width="46"
+                        height="46" loading="lazy" alt="Top Mentor Icon">
+                    <button class="button">Connect</button>
+                </div>
+                <div class="cptn">
+                    <div class="user">
+                        <img width="110" height="110" loading="lazy" alt="Aditya Nimesh Raj"
+                            src="https://d8it4huxumps7.cloudfront.net/uploads/mentors/profile/64a0fae86d011.webp">
+                        <div class="icon">
+                            <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/655b2c549c17f_bolt_1.svg"
+                                alt="Bolt Icon" width="11" height="16" loading="lazy">
+                        </div>
+                    </div>
+                    <h3>Aditya Nimesh Raj</h3>
+                    <h4>Top mentor @ Unstop | Product Manager at ICICI Bank | Ex Infosys | SCMHRD</h4>
+                    <div class="bottom">
+                        <div>
+                            <div class="experience">
+                                <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/655dade4cddeb_business_center.svg"
+                                    alt="Experience Icon" height="18" width="18" loading="lazy">
+                                2 Years
+                            </div>
+                            <div class="review">
+                                <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/655dae05097d4_business_center_1.svg"
+                                    alt="Reviews Icon" height="18" width="18" loading="lazy">
+                                5
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+    <script>
+        // JavaScript for image rotation
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentIndex = 0;
+            const images = document.querySelectorAll('#imageContainer img');
+
+            function showImage(index) {
+                images.forEach(img => img.style.display = 'none');
+                images[index].style.display = 'block';
+            }
+
+            function rotateImages() {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            }
+
+            // Initial display
+            showImage(currentIndex);
+
+            // Rotate images every 5 seconds
+            setInterval(rotateImages, 5000);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Filter Options</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        .banner {
+            width: 100%;
+            height: 400px;
+            background-color: var(--cultured-1);
+        }
+
+        .course {
+            width: 90%;
+            margin: 5%;
+            color: black;
+            display: flex;
+
+
+        }
+
+        .course-card {
+            transition: transform 0.3s;
+        }
+
+        .course-card:hover {
+            transform: scale(1.05);
+        }
+
+        #clickableImage {
+            transition: transform 0.3s ease;
+        }
+
+        #clickableImage:hover {
+            transform: scale(1.1);
+        }
+
+        #clickableImage.clicked {
+            filter: grayscale(100%);
+        }
+
+        .head h1 {
+            font-size: 50px;
+            font-weight: bold;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            margin-top: 100px;
+        }
+
+        .course-card {
+            transition: transform 0.3s;
+        }
+
+        .course-card:hover {
+            transform: scale(1.05);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .filter-section {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+            height: 1100px;
+            overflow: auto;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .subject {
+            display: flex;
+        }
+
+        .subject_portal {
+            width: 80%;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .course-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            width: 320px;
+            height: 550px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+        .preview-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .card-info {
+            padding: 20px;
+
+        }
+
+        .partner-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .partner-info img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .ratings {
+            margin-bottom: 10px;
+        }
+
+        .section1 {
+            width: 100%;
+            height: auto;
+        }
+
+        .section2 {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        .skill {
+            font-size: 200px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .other {
+            /* width: 90%; */
+            background-color: hsl(36, 100%, 55%);
+        }
+
+        .other h1 {
+            justify-content: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .other_topic {
+            width: auto;
+        }
+
+        .list-group-item:last-child {
+            border-bottom-right-radius: inherit;
+            border-bottom-left-radius: inherit;
+            width: 300px;
+            height: 100px;
+            display: flex;
+            font-weight: 600;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s;
+
+        }
+
+        .list-group-item:last-child:hover {
+            background-color: rgb(13, 130, 232);
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer-icons a {
+            color: #fff;
+            margin: 0 10px;
+        }
+
+        .footer-icons a:hover {
+            color: #ccc;
+        }
+
+        .div {
+            height: 60px;
+            display: flex;
+            overflow-y: auto;
+            border-bottom: 2px solid black;
+            border-radius: 4px;
+            margin: 5px;
+        }
+
+        .preview-image {
+            position: relative;
+            display: block;
+        }
+
+        .preview-image::before {
+            content: 'wikicoding';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: red;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .preview-image:hover::before {
+            opacity: 1;
+        }
+
+        .preview-image:hover::before {
+            content: 'WiKiCoding ';
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <button onclick="goBack()" class="goback-btn">Go Back</button>
+        <div< class="course">
+            <div class="head">
+                <h1> Start Learning course...</h1>
+            </div>
+            <div style="margin-left: 400px;">
+                <img src="{{ url_for('static', filename='/assets/images/learn3.jpeg.jpg') }}" alt="" width="300px"
+                    height="300px" id="clickableImage" style="border-radius: 50%;">
+            </div>
+
+            <div style="margin-right: 100px; margin-bottom: 150px;">
+                <img src="{{ url_for('static', filename='/assets/images/learn2.jpeg.jpg') }}" alt="" width="150px"
+                    height="150px" id="clickableImage" style="border-radius: 50%;">
+            </div>
+
+    </div>
+    <div class="subject">
+        <div class="filter-section">
+            <p>Filter by</p>
+
+            <!-- Course 1 -->
+            <div class="div">
+                <input type="checkbox" id="introductionToCS" name="introductionToCS">
+                <label for="introductionToCS">Introduction to Computer Science</label>
+            </div>
+
+            <!-- Course 2 -->
+            <div class="div">
+                <input type="checkbox" id="dataStructuresAlgorithms" name="dataStructuresAlgorithms">
+                <label for="dataStructuresAlgorithms">Data Structures and Algorithms</label>
+            </div>
+
+            <!-- Course 3 -->
+            <div class="div">
+                <input type="checkbox" id="webDevelopmentFundamentals" name="webDevelopmentFundamentals">
+                <label for="webDevelopmentFundamentals">Web Development Fundamentals</label>
+            </div>
+
+            <!-- Course 4 -->
+            <div class="div">
+                <input type="checkbox" id="databaseManagementSystems" name="databaseManagementSystems">
+                <label for="databaseManagementSystems">Database Management Systems</label>
+            </div>
+
+            <!-- Course 5 -->
+            <div class="div">
+                <input type="checkbox" id="operatingSystemsPrinciples" name="operatingSystemsPrinciples">
+                <label for="operatingSystemsPrinciples">Operating Systems Principles</label>
+            </div>
+
+            <!-- Course 6 -->
+            <div class="div">
+                <input type="checkbox" id="softwareEngineeringPractices" name="softwareEngineeringPractices">
+                <label for="softwareEngineeringPractices">Software Engineering Practices</label>
+            </div>
+
+            <!-- Course 7 -->
+            <div class="div">
+                <input type="checkbox" id="computerNetworksCommunications" name="computerNetworksCommunications">
+                <label for="computerNetworksCommunications">Computer Networks and Communications</label>
+            </div>
+
+            <!-- Course 8 -->
+            <div class="div">
+                <input type="checkbox" id="cybersecurityFundamentals" name="cybersecurityFundamentals">
+                <label for="cybersecurityFundamentals">Cybersecurity Fundamentals</label>
+            </div>
+
+            <!-- Course 9 -->
+            <div class="div">
+                <input type="checkbox" id="artificialIntelligenceConcepts" name="artificialIntelligenceConcepts">
+                <label for="artificialIntelligenceConcepts">Artificial Intelligence Concepts</label>
+            </div>
+
+            <!-- Course 10 -->
+            <div class="div">
+                <input type="checkbox" id="machineLearningFundamentals" name="machineLearningFundamentals">
+                <label for="machineLearningFundamentals">Machine Learning Fundamentals</label>
+            </div>
+
+            <!-- Course 11 -->
+            <div class="div">
+                <input type="checkbox" id="mobileAppDevelopmentAndroid" name="mobileAppDevelopmentAndroid">
+                <label for="mobileAppDevelopmentAndroid">Mobile App Development with Android</label>
+            </div>
+
+            <!-- Course 12 -->
+            <div class="div">
+                <input type="checkbox" id="iOSAppDevelopmentSwift" name="iOSAppDevelopmentSwift">
+                <label for="iOSAppDevelopmentSwift">iOS App Development with Swift</label>
+            </div>
+
+            <!-- Course 13 -->
+            <div class="div">
+                <input type="checkbox" id="cloudComputingEssentials" name="cloudComputingEssentials">
+                <label for="cloudComputingEssentials">Cloud Computing Essentials</label>
+            </div>
+
+            <!-- Course 14 -->
+            <div class="div">
+                <input type="checkbox" id="computerGraphicsVisualization" name="computerGraphicsVisualization">
+                <label for="computerGraphicsVisualization">Computer Graphics and Visualization</label>
+            </div>
+
+            <!-- Course 15 -->
+            <div class="div">
+                <input type="checkbox" id="naturalLanguageProcessing" name="naturalLanguageProcessing">
+                <label for="naturalLanguageProcessing">Natural Language Processing</label>
+            </div>
+
+            <!-- Course 16 -->
+            <div class="div">
+                <input type="checkbox" id="IoTProgramming" name="IoTProgramming">
+                <label for="IoTProgramming">Internet of Things (IoT) Programming</label>
+            </div>
+
+            <!-- Course 17 -->
+            <div class="div">
+                <input type="checkbox" id="distributedSystemsDesign" name="distributedSystemsDesign">
+                <label for="distributedSystemsDesign">Distributed Systems Design</label>
+            </div>
+
+            <!-- Course 18 -->
+            <div class="div">
+                <input type="checkbox" id="gameDevelopmentUnity" name="gameDevelopmentUnity">
+                <label for="gameDevelopmentUnity">Game Development with Unity</label>
+            </div>
+
+            <!-- Course 19 -->
+            <div class="div">
+                <input type="checkbox" id="quantumComputingPrinciples" name="quantumComputingPrinciples">
+                <label for="quantumComputingPrinciples">Quantum Computing Principles</label>
+            </div>
+
+            <!-- Course 20 -->
+            <div class="div">
+                <input type="checkbox" id="blockchainCryptocurrencyTechnologies"
+                    name="blockchainCryptocurrencyTechnologies">
+                <label for="blockchainCryptocurrencyTechnologies">Blockchain and Cryptocurrency Technologies</label>
+            </div>
+
+        </div>
+
+        <div class="subject_portal">
+            <div>
+                <div class="section1" style="display: flex; gap: 50px; ">
+                    <div class="course-card" style="overflow: auto;">
+                        <div class="card-content">
+                            <div class="preview-image">
+                                <img src="{{ url_for('static', filename='/assets/images/ai1.jpg') }}" alt="" width="300"
+                                    height="300">
+
+                            </div>
+                            <div class="card-info">
+                                <a href="/specializations/python" target="_blank">
+                                    <h3>Python for Everybody</h3>
+                                </a>
+                                <p style="font-weight: bold;" font-size="200px">Skills you'll gain: Computer
+                                    Programming, Python Programming, HTML and
+                                    CSS,
+                                    etc.</p>
+                                <div class="ratings">
+                                    <p>Rating: 4.8 (268.3k reviews)</p>
+                                </div>
+                                <p>Level: Beginner</p>
+                            </div>
+                            <div>
+                                <a href="{{url_for('pythonmaterial')}}"><button class="btn btn-primary" style="margin: 20px;">Start Learning</button></a>
+                                <!-- <button class="btn btn-primary" style="margin: 20px;">Start Learning</button> -->
+                                <button class="btn btn-info"><i class="fas fa-chart-line"></i> Progress</button>
+                                <button class="btn btn-success" style="margin: 20px;"><i class="fas fa-book"></i>Course
+                                    Quiz</button>
+                                <button class="btn btn-warning"><i class="fas fa-users"></i> Practice</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card" style="overflow: auto;">
+                        <div class="card-content">
+                            <div class="preview-image">
+                                <img src="{{ url_for('static', filename='/assets/images/data_science.jpg') }}" alt=""
+                                    width="300" height="300">
+
+                            </div>
+                            <div class="card-info">
+                                <a href="/specializations/web-development" target="_blank">
+                                    <h3>Data Science Deep Dive</h3>
+                                </a>
+                                <p style="font-weight: bold; font-size: 16px;">Skills you'll gain: Data Analysis,
+                                    Machine Learning, Python Programming, etc.</p>
+                                <div class="ratings">
+                                    <p>Rating: 4.9 (182.7k reviews)</p>
+                                </div>
+                                <p>Level: Intermediate</p>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-primary" style="margin: 20px;">Start Learning</button>
+                                <button class="btn btn-info"><i class="fas fa-chart-line"></i> Progress</button>
+                                <button class="btn btn-success" style="margin: 20px;"><i class="fas fa-book"></i>Course
+                                    Quiz</button>
+                                <button class="btn btn-warning"><i class="fas fa-users"></i> Practice</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card" style="overflow: auto;">
+                        <div class="card-content">
+                            <div class="preview-image">
+                                <img src="{{ url_for('static', filename='/assets/images/javascript.jpg') }}" alt=""
+                                    width="300" height="300">
+
+                            </div>
+                            <div class="card-info">
+                                <a href="/specializations/javascript" target="_blank">
+                                    <h3>JavaScript Mastery</h3>
+                                </a>
+                                <p style="font-weight: bold; font-size: 16px;">Skills you'll gain: JavaScript, DOM
+                                    Manipulation, Front-End Development, etc.</p>
+                                <div class="ratings">
+                                    <p>Rating: 4.7 (312.5k reviews)</p>
+                                </div>
+                                <p>Level: Intermediate</p>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-primary" style="margin: 20px;">Start Learning</button>
+                                <button class="btn btn-info"><i class="fas fa-chart-line"></i> Progress</button>
+                                <button class="btn btn-success" style="margin: 20px;"><i class="fas fa-book"></i>Course
+                                    Quiz</button>
+                                <button class="btn btn-warning"><i class="fas fa-users"></i> Practice</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="section2" style="display: flex; gap: 50px;">
+                <div class="course-card" style="overflow: auto;">
+                    <div class="card-content">
+                        <div class="preview-image">
+                            <img src="{{ url_for('static', filename='/assets/images/web.jpg') }}" alt="" width="300"
+                                height="300">
+
+                        </div>
+                        <div class="card-info">
+                            <a href="/specializations/web-development" target="_blank">
+                                <h3>Web Development Essentials</h3>
+                            </a>
+                            <p style="font-weight: bold; font-size: 16px;">Skills you'll gain: HTML, CSS, Responsive
+                                Design, Web Development Basics, etc.</p>
+                            <div class="ratings">
+                                <p>Rating: 4.8 (268.3k reviews)</p>
+                            </div>
+                            <p>Level: Beginner</p>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-primary" style="margin: 20px;">Start Learning</button>
+                            <button class="btn btn-info"><i class="fas fa-chart-line"></i> Progress</button>
+                            <button class="btn btn-success" style="margin: 20px;"><i class="fas fa-book"></i>Course
+                                Quiz</button>
+                            <button class="btn btn-warning"><i class="fas fa-users"></i> Practice</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="course-card" style="overflow: auto;">
+                    <div class="card-content">
+                        <div class="preview-image">
+                            <img src="{{ url_for('static', filename='/assets/images/ai2.jpg') }}" alt="" width="300"
+                                height="300">
+
+                        </div>
+                        <div class="card-info">
+                            <a href="/specializations/artificial-intelligence" target="_blank">
+                                <h3>Artificial Intelligence Fundamentals</h3>
+                            </a>
+                            <p style="font-weight: bold; font-size: 16px;">Skills you'll gain: AI Basics, Python
+                                Programming, Machine Learning, Neural Networks, etc.</p>
+                            <div class="ratings">
+                                <p>Rating: 4.8 (156.4k reviews)</p>
+                            </div>
+                            <p>Level: Intermediate</p>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-primary" style="margin: 20px;">Start Learning</button>
+                            <button class="btn btn-info"><i class="fas fa-chart-line"></i> Progress</button>
+                            <button class="btn btn-success" style="margin: 20px;"><i class="fas fa-book"></i>Course
+                                Quiz</button>
+                            <button class="btn btn-warning"><i class="fas fa-users"></i> Practice</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" style="overflow: auto;">
+                    <div class="card-content">
+                        <div class="preview-image">
+                            <img src="{{ url_for('static', filename='/assets/images/mobile.jpg') }}" alt="" width="300"
+                                height="300">
+
+                        </div>
+                        <div class="card-info">
+                            <a href="/specializations/mobile-app-development" target="_blank">
+                                <h3>Mobile App Development</h3>
+                            </a>
+                            <p style="font-weight: bold; font-size: 16px;">Skills you'll gain: Swift Programming, iOS
+                                Development, Mobile App Design, etc.</p>
+                            <div class="ratings">
+                                <p>Rating: 4.7 (234.1k reviews)</p>
+                            </div>
+                            <p>Level: Intermediate</p>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-primary" style="margin: 20px;">Start Learning</button>
+                            <button class="btn btn-info"><i class="fas fa-chart-line"></i> Progress</button>
+                            <button class="btn btn-success" style="margin: 20px;"><i class="fas fa-book"></i>Course
+                                Quiz</button>
+                            <button class="btn btn-warning"><i class="fas fa-users"></i> Practice</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="other">
+        <h1>Choose other Topic</h1>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px;">
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Introduction to Computer Science and Programming
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Data Structures and Algorithms
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Computer Networks and Security
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Operating Systems Principles
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Software Engineering Fundamentals
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Introduction to Artificial Intelligence
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Database Systems and Design
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Web Development and Design
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Machine Learning Basics
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Computer Graphics and Visualization
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Cybersecurity Fundamentals
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Cloud Computing Technologies
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Mobile App Development
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Advanced Programming Paradigms
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Computer Architecture and Organization
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Natural Language Processing
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Big Data Analytics
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Embedded Systems Development
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Cryptography and Network Security
+                </a>
+            </div>
+            <div class="other_topic">
+                <a href="#" class="list-group-item list-group-item-action course-btn">
+                    Robotics and Autonomous Systems
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="box" style="background-color: black;">
+        <header class="main-top2 page-header page-header-orange text-white">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-8">
+                        <h1>Get in Touch: Connect with Us | Let's Start the Conversation</h1>
+                        <p>For inquiries or support, contact us anytime</p>
+                        <div class="contact-links">
+                            <a href="mailto:contact@example.com"><i class="fas fa-envelope"></i> Email</a>
+                            <a href="https://www.instagram.com/example"><i class="fab fa-instagram"></i> Instagram</a>
+                            <a href="https://www.linkedin.com/in/example"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a href="https://github.com/example"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

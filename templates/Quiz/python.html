@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JavaScript Quiz App</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #b9b3a9;
+            display: flex;
+            justify-content: center;
+            background-image: linear-gradient(to right, #DAE2F8 0%, #D6A4A4  51%, #DAE2F8  100%);
+
+        }
+
+        .container {
+            width: 450px;
+            padding: 20px;
+            margin-top: 80px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            position: relative;
+            /* Added to allow positioning of the line */
+            margin-bottom: 20px;
+            /* Adjust spacing as needed */
+        }
+
+        h1::after {
+            content: "";
+            /* Create a pseudo-element for the line */
+            display: block;
+            width: 100%;
+            /* Adjust the width of the line */
+            height: 5px;
+            /* Adjust the height/thickness of the line */
+            background-color: #c342ca;
+            background-image: linear-gradient(to right, #e52d27 0%, #b31217 51%, #e52d27 100%);
+            /* Adjust the color of the line */
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            /* Center the line */
+        }
+
+        .question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .options {
+            margin-bottom: 20px;
+        }
+
+        .option {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #428bca;
+            background-image: linear-gradient(to right, #3D7EAA 0%, #FFE47A 51%, #3D7EAA 100%);
+
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .button:hover {
+            background-color: #3071a9;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            color: red;
+            background-color: black;
+            background-image: linear-gradient(to right, #ECE9E6 0%, #FFFFFF 51%, #ECE9E6 100%);
+
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .analysis {
+            margin-top: 10px;
+        }
+
+        .analysis {
+            margin-top: 10px;
+        }
+
+        .results {
+            margin-left: 20px;
+            margin-bottom: 40%;
+        }
+
+        #chart {
+            /* background-color: red; */
+            width: 100px;
+            height: 100px;
+        }
+
+        canvas {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>BrainWave Quizzes</h1>
+        <div id="quiz"></div>
+        <div id="result" class="result"></div>
+        <button id="submit" class="button">Submit</button>
+        <div class="analysis" id="analysis"></div>
+        <button id="retry" class="button hide">Retry</button>
+        <button id="showAnswer" class="button hide">Show Answer</button>
+        <canvas id="chart" width="300" height="300"></canvas>
+    </div>
+    <script>
+
+        const quizData = [
+            {
+                question: 'Which programming language is Python often compared to?',
+                options: ['Java', 'C++', 'JavaScript', 'Ruby'],
+                answer: 'Java',
+            },
+            {
+                question: 'What type of programming language is Python?',
+                options: ['Compiled', 'Interpreted', 'Assembly', 'Machine Code'],
+                answer: 'Interpreted',
+            },
+            {
+                question: 'Which keyword is used to define a function in Python?',
+                options: ['def', 'function', 'define', 'fun'],
+                answer: 'def',
+            },
+            {
+                question: 'What is the output of the following code?\nprint(3 * "Python")',
+                options: ['3', 'Python', 'PythonPythonPython', 'Error'],
+                answer: 'PythonPythonPython',
+            },
+            {
+                question: 'In Python, which data type is used to store a sequence of characters?',
+                options: ['int', 'float', 'str', 'bool'],
+                answer: 'str',
+            },
+            {
+                question: 'Which built-in function is used to get the length of a sequence?',
+                options: ['len()', 'count()', 'length()', 'size()'],
+                answer: 'len()',
+            },
+            {
+                question: 'Which statement is used to exit a loop prematurely in Python?',
+                options: ['break', 'return', 'exit', 'stop'],
+                answer: 'break',
+            },
+            {
+                question: 'What does the ' % ' operator do in Python?',
+                options: ['Modulus', 'Exponentiation', 'Division', 'Multiplication'],
+                answer: 'Modulus',
+            },
+            {
+                question: 'Which module is used for regular expressions in Python?',
+                options: ['regex', 're', 'reg', 'regular'],
+                answer: 're',
+            },
+            {
+                question: 'In Python, which of the following is not a mutable data type?',
+                options: ['list', 'dictionary', 'tuple', 'set'],
+                answer: 'tuple',
+            },
+        ];
+
+        const quizContainer = document.getElementById('quiz');
+        const resultContainer = document.getElementById('result');
+        const submitButton = document.getElementById('submit');
+        var analysisDisplay = document.getElementById("analysis");
+        const retryButton = document.getElementById('retry');
+        const showAnswerButton = document.getElementById('showAnswer');
+
+
+        let currentQuestion = 0;
+        let score = 0;
+        let incorrectAnswers = [];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function displayQuestion() {
+            const questionData = quizData[currentQuestion];
+
+            const questionElement = document.createElement('div');
+            questionElement.className = 'question';
+            questionElement.innerHTML = questionData.question;
+
+            const optionsElement = document.createElement('div');
+            optionsElement.className = 'options';
+
+            const shuffledOptions = [...questionData.options];
+            shuffleArray(shuffledOptions);
+
+            for (let i = 0; i < shuffledOptions.length; i++) {
+                const option = document.createElement('label');
+                option.className = 'option';
+
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'quiz';
+                radio.value = shuffledOptions[i];
+
+                const optionText = document.createTextNode(shuffledOptions[i]);
+
+                option.appendChild(radio);
+                option.appendChild(optionText);
+                optionsElement.appendChild(option);
+            }
+
+            quizContainer.innerHTML = '';
+            quizContainer.appendChild(questionElement);
+            quizContainer.appendChild(optionsElement);
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="quiz"]:checked');
+            if (selectedOption) {
+                const answer = selectedOption.value;
+                if (answer === quizData[currentQuestion].answer) {
+                    score++;
+                } else {
+                    incorrectAnswers.push({
+                        question: quizData[currentQuestion].question,
+                        incorrectAnswer: answer,
+                        correctAnswer: quizData[currentQuestion].answer,
+                    });
+                }
+                currentQuestion++;
+                selectedOption.checked = false;
+                if (currentQuestion < quizData.length) {
+                    displayQuestion();
+                } else {
+                    displayResult();
+                }
+            }
+        }
+
+        function displayResult() {
+            quizContainer.style.display = 'none';
+            submitButton.style.display = 'none';
+            retryButton.style.display = 'inline-block';
+            showAnswerButton.style.display = 'inline-block';
+            resultContainer.innerHTML = `You scored ${score} out of ${quizData.length}!`;
+        }
+
+        function retryQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            incorrectAnswers = [];
+            quizContainer.style.display = 'block';
+            submitButton.style.display = 'inline-block';
+            retryButton.style.display = 'none';
+            showAnswerButton.style.display = 'none';
+            resultContainer.innerHTML = '';
+            displayQuestion();
+        }
+
+        function showAnswer() {
+            quizContainer.style.display = 'none';
+            submitButton.style.display = 'none';
+            retryButton.style.display = 'inline-block';
+            showAnswerButton.style.display = 'none';
+
+            let incorrectAnswersHtml = '';
+            for (let i = 0; i < incorrectAnswers.length; i++) {
+                incorrectAnswersHtml += `
+      <p>
+        <strong>Question:</strong> ${incorrectAnswers[i].question}<br>
+        <strong>Your Answer:</strong> ${incorrectAnswers[i].incorrectAnswer}<br>
+        <strong>Correct Answer:</strong> ${incorrectAnswers[i].correctAnswer}
+      </p>
+    `;
+            }
+
+            resultContainer.innerHTML = `
+    <p>You scored ${score} out of ${quizData.length}!</p>
+    <p>Incorrect Answers:</p>
+    ${incorrectAnswersHtml}
+  `;
+
+        }
+
+        submitButton.addEventListener('click', checkAnswer);
+        retryButton.addEventListener('click', retryQuiz);
+        showAnswerButton.addEventListener('click', showAnswer);
+
+        displayQuestion();
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='assets/images/reg_back.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding-top: 50px;
+        }
+
+        .card {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .card-header {
+            border-radius: 10px 10px 0 0;
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-subtitle {
+            color: #6c757d;
+        }
+
+        .card-text {
+            font-size: 16px;
+        }
+
+        .form-control {
+            border-radius: 20px;
+        }
+
+        .btn-primary {
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <form class="mb-4">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search by question" aria-label="Search" aria-describedby="search-btn">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="search-btn">Search</button>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            {% for answer in answers %}
+            <div class="col-md-6">
+                <div class="card border-primary mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title">Author: {{ answer[1] }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Question</h6>
+                        <p class="card-text">{{ answer[2] }}</p>
+                        <hr>
+                        <h6 class="card-subtitle mb-2 text-muted">Answer</h6>
+                        <p class="card-text">{{ answer[3] }}</p>
+                        <!-- Rating input -->
+                        <div class="form-group">
+                            <label for="rating{{ loop.index }}">Rating:</label>
+                            <input type="number" class="form-control" id="rating{{ loop.index }}" name="rating{{ loop.index }}" min="1" max="5">
+                        </div>
+                        <button type="button" class="btn btn-primary submit-rating" data-answer-id="{{ answer[0] }}">Submit Rating</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.submit-rating').click(function() {
+                var answerId = $(this).data('answer-id');
+                var rating = $('#rating' + answerId).val();
+
+                // Send rating to the server using AJAX
+                $.ajax({
+                    url: '/submit_rating',
+                    method: 'POST',
+                    data: {
+                        answer_id: answerId,
+                        rating: rating
+                    },
+                    success: function(response) {
+                        // Optionally handle success response
+                        alert(response);
+                    },
+                    error: function(xhr, status, error) {
+                        // Optionally handle error
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

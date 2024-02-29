@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Website</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        /* Box Styles */
+        body {
+            background-image: url("{{ url_for('static', filename='assets/images/newback.png') }}");
+            background-repeat: no-repeat;
+            background-size: cover; /* This ensures the background image covers the entire body */
+        }
+        
+
+        .news {
+            width: 90%;
+            height: 300px;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .news img {
+            width: 90%;
+            height: 300px;
+            margin-left: 7.5%;
+
+        }
+
+        .mt-3 {
+            background-image: url("{{ url_for('static', filename='assets/images/background.jpg') }}");
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="news">
+        <img src="{{ url_for('static', filename='assets/images/breaking.jpg') }}" alt="Team Member 1">
+    </div>
+    <div class="container mt-3">
+
+        {% if headlines %}
+        <div class="row">
+            {% for article in headlines %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ article.urlToImage }}" class="card-img-top" alt="{{ article.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text">{{ article.description }}</p>
+                        <a href="{{ article.url }}" class="btn btn-primary" target="_blank">Read More</a>
+                        <button class="btn btn-success" onclick="likeArticle('{{ article.title }}')">👍 Like</button>
+                        <button class="btn btn-danger" onclick="dislikeArticle('{{ article.title }}')">👎
+                            Dislike</button>
+                        <span id="{{ article.title }}-likes" class="ml-2">Likes: 0</span>
+                        <span id="{{ article.title }}-dislikes" class="ml-2">Dislikes: 0</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>Failed to fetch news headlines.</p>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        function likeArticle(title) {
+            updateReactionCount(title, 'likes');
+        }
+
+        function dislikeArticle(title) {
+            updateReactionCount(title, 'dislikes');
+        }
+
+        function updateReactionCount(title, reactionType) {
+            // You can implement AJAX calls to update the like and dislike counts on the server side
+            alert(`${reactionType.charAt(0).toUpperCase() + reactionType.slice(1)}: ${title}`);
+
+            // For demonstration purposes, increment the counts locally
+            const likesElement = document.getElementById(`${title}-likes`);
+            const dislikesElement = document.getElementById(`${title}-dislikes`);
+
+            const currentLikes = parseInt(likesElement.innerText.split(':')[1]) || 0;
+            const currentDislikes = parseInt(dislikesElement.innerText.split(':')[1]) || 0;
+
+            if (reactionType === 'likes') {
+                likesElement.innerText = `Likes: ${currentLikes + 1}`;
+            } else {
+                dislikesElement.innerText = `Dislikes: ${currentDislikes + 1}`;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        .form-group {
+            position: relative;
+        }
+        .form-group i {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #ccc;
+        }
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+        .btn-icon:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Email Verification</h1>
+        <form action="/step1" method="post">
+            <div class="form-group">
+                <label for="email">
+                    <i class="far fa-envelope"></i>
+                </label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <button type="submit" class="btn btn-icon">
+                <i class="fas fa-paper-plane"></i> Submit
+            </button>
+        </form>
+    </div>
+
+    <!-- Font Awesome Icons (You may need to include the library if not already included) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

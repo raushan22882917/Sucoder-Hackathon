@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <title>WebEDU Dev Challenge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header,
+        section,
+        footer {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        header {
+            /* background-color: #007bff; */
+            color: white;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        section {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+
+        .contact-links {
+            margin-top: 20px;
+        }
+
+        .contact-links a {
+            text-decoration: none;
+            color: white;
+            margin: 0 10px;
+        }
+
+        #registration-form-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        #registration-form-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #registration-form-container label {
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+            color: #555;
+        }
+
+        #registration-form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        #registration-form-container button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #registration-form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .info {
+            width: 600px;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+
+
+        .event-info {
+            display: flex;
+            justify-content: space-around;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .status .badge {
+            padding: 10px;
+        }
+
+        .participants,
+        .team-info,
+        .status,
+        .impressions {
+            background-color: white;
+        }
+
+        .count {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .deadline,
+        .days-left,
+        .team-size,
+        .members,
+        .watchlist {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+            display: flex;
+        }
+
+        .btn {
+            margin: 0 10px;
+        }
+
+        .eligibility {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        .eligibility p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .eligibility ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .eligibility li {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .referral-leaderboard {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        .referral-leaderboard p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .prizes-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 50px auto;
+        }
+
+        .prize-card {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px dotted black;
+        }
+
+        .prize-icon {
+            width: 50px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            color: #007bff;
+            font-size: 18px;
+        }
+
+        p {
+            color: #555;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <div id="registration-form-container" style="border: 2px dotted orangered;">
+        <span class="close-btn" onclick="closeForm()">&#10006;</span>
+        <h2 style="background-color:#0056b3; color: white;">Registration Form</h2>
+
+        {% if success_message %}
+        <div class="alert alert-success" role="alert">
+            {{ success_message }}
+        </div>
+        {% endif %}
+
+        <form id="registration-form" action="{{ url_for('registration') }}" method="post">
+            <label for="team_lead_name">Team Lead Name*</label>
+            <input type="text" id="team_lead_name" name="name" required>
+
+            <label for="team_members">Other Team Members (full names separated by commas)*</label>
+            <input type="text" id="team_members" name="team_members" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="college_name">Enter College Name:</label>
+            <input type="text" id="college_name" name="college_name" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+    <div style="display: flex;">
+        <div>
+            <section>
+                <h2>Topic: Educational Website for Learning</h2>
+                <h3>Instructions:</h3>
+                <p>Participants are encouraged to create a user-friendly, interactive platform that offers educational
+                    content.
+                    The website should be designed for learners of all ages and cover a diverse range of subjects.
+                    Consider
+                    incorporating features like gamification, multimedia elements, and user progress tracking to enhance
+                    the
+                    learning experience.</p>
+                <h3>Time Frame:</h3>
+                <ul>
+                    <li>Registration Opens: [Start Date]</li>
+                    <li>Hackathon Duration: 3 weeks</li>
+                    <li>Submission Deadline: [End Date]</li>
+                    <li>Judging Period: 1 week</li>
+                </ul>
+                <h3>Reward And Prizes:</h3>
+                <ul>
+                    <div class="prizes-container">
+                        <div class="prize-card">
+                            <img src="{{ url_for('static', filename='assets/images/winner.png') }}" alt="1st Place Icon"
+                                class="prize-icon">
+                            <p>Winners of the B Track will get a cash prize of INR <br> 2,00,000 and PPOs from Hero
+                                MotoCorp</p>
+                            <p>
+                            <h3>200000</h3>
+                            </p>Feature in Promotional Material</p>
+                        </div>
+
+                        <div class="prize-card">
+                            <img src="{{ url_for('static', filename='assets/images/winner.png') }}" alt="1st Place Icon"
+                                class="prize-icon">
+                            <p>Winners of the B Track will get a cash prize of INR <br> 2,00,000 and PPOs from Hero
+                                MotoCorp</p>
+                            <p>
+                            <h3>100000</h3>
+                            </p>Feature in Promotional Material</p>
+                        </div>
+
+                        <div class="prize-card">
+                            <img src="{{ url_for('static', filename='assets/images/winner.png') }}" alt="1st Place Icon"
+                                class="prize-icon">
+                            <p>Winners of the B Track will get a cash prize of INR <br> 2,00,000 and PPOs from Hero
+                                MotoCorp</p>
+                            <p>
+                            <h3>50000</h3>
+                            </p>Feature in Promotional Material</p>
+                        </div>
+                    </div>
+
+                </ul>
+                <h3>Judging Criteria:</h3>
+                <ul>
+                    <li>User Experience and Design</li>
+                    <li>Educational Content and Quality</li>
+                    <li>Innovation and Creativity</li>
+                    <li>Functionality and Interactivity</li>
+                    <li>Overall Impact and Potential</li>
+                </ul>
+                <h3>Submission Requirements:</h3>
+                <ul>
+                    <li>A working prototype of the website.</li>
+                    <li>Short video demo (3-5 minutes) showcasing the key features.</li>
+                    <li>Brief documentation describing the design, technologies used, and future development
+                        possibilities.
+                    </li>
+                </ul>
+                <h3>Judges:</h3>
+                <p>[List of Judges with expertise in web development and education]</p>
+                <h3>Platform:</h3>
+                <p>Participants are free to use any web development tools and technologies.</p>
+                <h3>Additional Notes:</h3>
+                <ul>
+                    <li>Collaboration is allowed (teams up to 3 members).</li>
+                    <li>Plagiarism will result in immediate disqualification.</li>
+                    <li>The website should be accessible and user-friendly on both desktop and mobile devices.</li>
+                </ul>
+                <button style="display: flex; align-items: center; justify-content: center; margin-left: 45%;">Start
+                    Hackathon</button>
+            </section>
+
+        </div>
+        <div class="info">
+            <div style="display: flex;  background-color:white;">
+                <h4 style="font-size:bold; font-weight:bold;">Free</h4>
+                <div style="margin-left: 130px; margin-top:5px;">
+                    <a href=""><Button>Register</Button></a>
+                </div>
+            </div>
+            <div class="status">
+                <div style="display: flex; margin-left: 10px;">
+                    <div
+                        style="width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;">
+                        <p class="team-size"><i class="fas fa-users"></i></p>
+                    </div>
+                    <div style="margin-left: 5px;">
+                        <span> Registered</span>
+                        <p class="count"> 14,078</p>
+                    </div>
+                </div>
+            </div>
+            <div class="participants">
+                <div style="display: flex; margin-left: 10px;">
+                    <div
+                        style="width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;">
+                        <p class="team-size"><i class="far fa-clock"></i></p>
+                    </div>
+                    <div style="margin-left: 5px;">
+                        <p class="deadline">Registration Deadline</p>
+                        <p class="days-left"> 14 days left</p>
+                    </div>
+                </div>
+            </div>
+            <div class="team-info">
+                <div style="display: flex; margin-left: 10px;">
+                    <div
+                        style="width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;">
+                        <p class="team-size"><i class="fas fa-users"></i></p>
+                    </div>
+                    <div style="margin-left: 5px;">
+                        <p class="team-size">Team Size</i></p>
+                        <p class="members">3 Members</p>
+                    </div>
+                </div>
+            </div>
+            <div class="impressions">
+                <div style="display: flex; margin-left: 10px;">
+                    <div
+                        style="width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;">
+                        <p class="team-size"><i class="far fa-eye"></i></i></p>
+                    </div>
+                    <div style="margin-left: 5px;">
+                        <p class="watchlist">Impressions</p>
+                        <p class="count">14,77,926</p>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn btn-secondary watchlist-btn"><i class="fas fa-list-alt"></i>+
+                    Watchlist</button>
+                <button class="btn btn-primary calendar-btn"><i class="fas fa-calendar-plus"></i>
+                    Calendar</button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="box" style="background-color:#151515 ;">
+        <header class="main-top2 page-header page-header-orange text-white">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-8">
+                        <div class="contact-links">
+                            <a href="mailto:contact@example.com"><i class="fas fa-envelope"></i> Email</a>
+                            <a href="https://www.instagram.com/example"><i class="fab fa-instagram"></i> Instagram</a>
+                            <a href="https://www.linkedin.com/in/example"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a href="https://github.com/example"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+
+
+
+    <script>
+        function startHackathon() {
+            // Perform actions when the "Start" button is clicked
+            alert("Let the WebEDU Dev Challenge Begin!");
+            // Additional functionality can be added here
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Automatically open the registration form
+            var formContainer = document.getElementById('registration-form-container');
+            formContainer.style.display = 'block';
+        });
+    </script>
+
+
+
+    <script>
+        function closeForm() {
+            var formContainer = document.getElementById('registration-form-container');
+            formContainer.style.display = 'none';
+        }
+
+        function submitForm() {
+            // Get values from the form
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+
+            // Save data to localStorage (you should replace this with a server-side solution)
+            var userData = {
+                name: name,
+                email: email
+            };
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            // Close the registration form
+            closeForm();
+        }
+    </script>
+</body>
+
+</html>

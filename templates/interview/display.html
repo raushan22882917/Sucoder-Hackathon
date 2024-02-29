@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Experiences</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-oq1wejsiJL3+EylVs6k4C4d4gcQSsEXv9TMBQrFJKzayROu2WMu8P5Iln25+M0CxI6n3LbG5lZJP2e4dg0pEXCw=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='assets/images/learn4.jpeg') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #1E90FF;
+            /* Adjust the color to your preference */
+        }
+
+        .card-text {
+            color: #333;
+        }
+
+        .row {
+            margin-left: 10%;
+            margin-right: 10%;
+            height: 200px;
+        }
+
+        .card-body {
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            min-height: 1px;
+            padding: 1.25rem;
+            border: 2px dotted orange;
+            height: 200px;
+            width: 100%;
+            overflow: auto;
+
+
+
+        }
+
+        .search-container {
+            display: flex;
+            width: 600px;
+            justify-content: center;
+            align-items: center;
+            margin: 30px;
+        }
+
+        @media (max-width: 767.98px) {
+            .card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light"
+            style="display: flex; justify-content:center; align-items:center">
+            <div>
+                <button class="btn btn-outline-primary my-2 my-sm-0" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+            <div class="search-container mb-4">
+                <input type="text" class="form-control" id="searchInput" placeholder="Search by Companies...">
+                <button class="btn btn-primary" onclick="searchInterviews()">Search</button>
+            </div>
+        </nav>
+    </header>
+
+
+    <section class="container mt-5">
+        <div class="row">
+            {% for interview in interviews %}
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ interview[1] }} at {{ interview[2] }}</h5>
+                        <!-- Use the |safe filter to render HTML content without escaping -->
+                        <p class="card-text">{{ interview[3]|safe }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function searchInterviews() {
+            var input, filter, cards, card, title, i;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            cards = document.querySelectorAll(".card");
+
+            for (i = 0; i < cards.length; i++) {
+                card = cards[i];
+                title = card.querySelector(".card-title");
+                var titleText = title.innerText.toUpperCase();
+
+                if (titleText.indexOf(filter) > -1) {
+                    // Split the title into parts based on the filter text
+                    var parts = titleText.split(filter);
+
+                    // Reconstruct the title with the matching part in red
+                    title.innerHTML = parts[0] + '<span style="color: red;">' + filter + '</span>' + parts[1];
+
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            }
+        }
+
+    </script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Platform</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Add these links in the head section of your HTML -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            padding-top: 56px;
+
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        nav {
+            background-color: white;
+            color: black;
+        }
+
+        nav a {
+            color: black;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            /* position: fixed; */
+            bottom: 0;
+            width: 100%;
+        }
+
+        #header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #navigation {
+            margin-bottom: 20px;
+        }
+
+        #navigation ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #navigation li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        #navigation a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        #dashboard {
+            color: black;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #events {
+            color: black;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Feedback styling */
+        #feedback {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        h2 {
+            color: #007bff;
+        }
+
+        /* Feedback Form styling */
+        #feedback-form {
+            margin-top: 20px;
+        }
+
+        #feedback-form p {
+            margin-bottom: 15px;
+        }
+
+        form {
+            margin-top: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        /* Submit button styling */
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+
+
+        .card-img-top {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card-img-top:hover {
+            transform: scale(1.1);
+            /* Increase the size on hover */
+        }
+
+
+
+
+        /* Community styling */
+        #community {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+
+        /* Discussion Forum styling */
+        #discussion-forum {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #discussion-list {
+            margin-bottom: 20px;
+        }
+
+        #discussion-list h3 {
+            color: #333;
+        }
+
+        #discussion-items {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .discussion-link {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .discussion-link:hover {
+            text-decoration: underline;
+        }
+
+        .discussion-author {
+            color: #555;
+        }
+
+        /* Selected Discussion styling */
+        #selected-discussion {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        #selected-discussion h3 {
+            color: #333;
+        }
+
+        #discussion-messages {
+            margin-top: 15px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+        }
+
+        .message-author {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .message-content {
+            color: #333;
+        }
+
+        /* Message Input Form styling */
+        #message-input {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #message-input h3 {
+            color: #333;
+        }
+
+        #message-form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 15px;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input,
+        textarea {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+
+        /* Progress Tracking styling */
+        #progress {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+
+
+        /* Participant Progress styling */
+        #participant-progress,
+        #overall-progress {
+            margin-top: 20px;
+        }
+
+        #participant-progress h3,
+        #overall-progress h3 {
+            color: #333;
+        }
+
+        .progress {
+            height: 20px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #e9ecef;
+        }
+
+        .progress-bar {
+            text-align: center;
+            line-height: 20px;
+            color: #fff;
+        }
+
+        /* Customize progress bar colors based on your design preferences */
+        #participant-progress .progress-bar {
+            background-color: #28a745;
+            /* Green */
+        }
+
+
+        #participant-progress p,
+        #overall-progress p {
+            margin-top: 10px;
+            color: #555;
+        }
+
+
+        /* Announcements and Updates styling */
+        #announcements {
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+
+
+        .card-deck {
+            margin-top: 20px;
+        }
+
+        .card {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            color: #333;
+        }
+
+        .card-text {
+            color: #555;
+        }
+
+        .text-muted {
+            color: #888;
+        }
+
+        /* Social Media styling */
+        #social-media {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+
+
+        /* Social Icons styling */
+        #social-icons {
+            margin-top: 20px;
+        }
+
+        #social-icons p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .social-icon {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 24px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            color: #0056b3;
+        }
+
+
+
+        /* Accessibility styling */
+        #accessibility,
+        #aesthetics {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+
+
+        /* Accessibility Information styling */
+        #accessibility-info,
+        #accessibility-tips,
+        #design-principles,
+        #color-scheme {
+            margin-top: 20px;
+        }
+
+        #accessibility-info p,
+        #accessibility-tips h3,
+        #design-principles h3,
+        #color-scheme h3 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        a {
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Accessibility Tips styling */
+        #accessibility-tips ul,
+        #design-principles ul {
+            margin-bottom: 15px;
+        }
+
+        /* Aesthetics styling */
+        #design-principles,
+        #color-scheme {
+            margin-top: 20px;
+        }
+
+        #design-principles p,
+        #color-scheme p {
+            margin-bottom: 15px;
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+
+        /* Notifications styling */
+        #notifications {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+
+        /* Notification System styling */
+        #notification-system,
+        #notification-settings {
+            margin-top: 20px;
+        }
+
+        #notification-system p,
+        #notification-settings h3,
+        #notification-settings p {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #notification-system li {
+            margin-bottom: 10px;
+        }
+
+        /* Notification Settings styling */
+        #notification-settings {
+            margin-top: 20px;
+        }
+
+        .chat-icon {
+            position: fixed;
+            bottom: 20px;
+            top: 100px;
+            right: 20px;
+            color: #fff;
+            border: none;
+            /* width: 200px; */
+            height: 50px;
+            gap: 20px;
+            display: flex;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+
+
+        #registration-form-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            z-index: 1;
+        }
+
+        #registration-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .close-btn {
+            align-self: flex-end;
+            cursor: pointer;
+        }
+
+        #registration-btn {
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .nav-link a{
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+
+
+    <!-- templates/hackathon_button.html -->
+
+    <a href="{{ url_for('hackathons') }}">
+        <button class="chat-icon" id="registration-btn" onclick="toggleForm()">
+            <img src="{{ url_for('static', filename='assets/images/logo.png') }}" alt=""
+                style="width: 40px; height: 40px; border-radius: 50%">
+            Join Hackathon
+        </button>
+    </a>
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div style="display: flex;">
+            <div><img src="{{ url_for('static', filename='/assets/images/logo.png') }}" alt="" width="50px"
+                    height="50px"></div>
+            <div style="margin-left: 20px;"><a class="navbar-brand" href="#" style="color:black;">WiKiCoding</a></div>
+        </div>
+        <!-- <a class="navbar-brand" href="#">Hackathon Platform</a> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#dashboard" style="color:black;">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="#events" style="color:black;">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects" style="color:black;">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="#judges" style="color:black;">Judges</a></li>
+                <li class="nav-item"><a class="nav-link" href="#community" style="color:black;">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="#support" style="color:black;">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <section id="dashboard">
+        <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" style="position: relative;">
+                    <img src="{{ url_for('static', filename='assets/images/hack1.jpg') }}" alt="Image 1"
+                        style="width: 100%; height: 300px;">
+                    <a href="{{ url_for('hackathons') }}"
+                        style="position: absolute; top: 80%; left: 90%; transform: translate(-50%, -50%); background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%); border: 2px dotted orange; ">
+                        <button class="btn btn-primary " style="border-radius: 8px;">Join Contest</button>
+                    </a>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='assets/images/hack2.jpg') }}" alt="Image 1"
+                        style="width: 100%; height:300px;">
+                    <a href="{{ url_for('hackathons') }}"
+                        style="position: absolute; top: 80%; left: 90%; transform: translate(-50%, -50%); background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%); border: 2px dotted orange; ">
+                        <button class="btn btn-primary">Join Contest</button>
+                    </a>
+
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='assets/images/hack3.jpg') }}" alt="Image 1"
+                        style="width: 100%; height:300px;">
+                    <a href="{{ url_for('hackathons') }}"
+                        style="position: absolute; top: 80%; left: 90%; transform: translate(-50%, -50%); background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%); border: 2px dotted orange; ">
+                        <button class="btn btn-primary">Join Contest</button>
+                    </a>
+
+                </div>
+                <!-- <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='assets/images/about-banner.jpg') }}" alt="Image 1"style="width: 100%; height:300px;">
+
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='assets/images/about-banner.jpg') }}" alt="Image 1"style="width: 100%; height:300px;">
+
+                </div> -->
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+    <!-- Event Calendar -->
+    <section id="events">
+        <div class="container">
+            <h2>Event Calendar</h2>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Upcoming Hackathons
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>Hackathon 1</strong>
+                                <br>Date: MM/DD/YYYY
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Hackathon 2</strong>
+                                <br>Date: MM/DD/YYYY
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Hackathon 3</strong>
+                                <br>Date: MM/DD/YYYY
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Important Deadlines
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>Challenge 1 Deadline</strong>
+                                <br>Date: MM/DD/YYYY
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Challenge 2 Deadline</strong>
+                                <br>Date: MM/DD/YYYY
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Project Submission Deadline</strong>
+                                <br>Date: MM/DD/YYYY
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Project Showcase -->
+
+
+
+    <!-- Judging Panel -->
+    <section id="judges">
+        <div class="container">
+            <h2>Judging Panel</h2>
+
+            <div class="card-deck">
+                <!-- Judge 1 -->
+                <div class="card">
+                    <img src="{{ url_for('static', filename='assets/images/about-banner.jpg') }}" class="card-img-top"
+                        alt="Judge 1 Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Judge 1</h5>
+                        <p class="card-text">Expertise: Area of expertise 1</p>
+                        <p class="card-text">Background: Brief description of the background and qualifications.</p>
+                    </div>
+                </div>
+
+                <!-- Judge 2 -->
+                <div class="card">
+                    <img src="{{ url_for('static', filename='assets/images/about-banner.jpg') }}" class="card-img-top"
+                        alt="Judge 2 Image">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Judge 2</h5>
+                        <p class="card-text">Expertise: Area of expertise 2</p>
+                        <p class="card-text">Background: Brief description of the background and qualifications.</p>
+                    </div>
+                </div>
+
+                <!-- Judge 3 -->
+                <div class="card">
+                    <img src="{{ url_for('static', filename='assets/images/about-banner.jpg') }}" class="card-img-top"
+                        alt="Judge 3 Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Judge 3</h5>
+                        <p class="card-text">Expertise: Area of expertise 3</p>
+                        <p class="card-text">Background: Brief description of the background and qualifications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Community -->
+
+
+    <!-- Progress Tracking -->
+
+
+
+    <!-- Announcements and Updates -->
+    <section id="announcements">
+        <div class="container">
+            <h2>Announcements and Updates</h2>
+
+            <div class="card-deck">
+                <!-- Announcement 1 -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Important Update</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod
+                            augue a
+                            justo
+                            porttitor, nec malesuada nisl feugiat.</p>
+                        <p class="card-text"><small class="text-muted">Posted on: MM/DD/YYYY</small></p>
+                    </div>
+                </div>
+
+                <!-- Announcement 2 -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Upcoming Event</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod
+                            augue a
+                            justo
+                            porttitor, nec malesuada nisl feugiat.</p>
+                        <p class="card-text"><small class="text-muted">Posted on: MM/DD/YYYY</small></p>
+                    </div>
+                </div>
+
+                <!-- Announcement 3 -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Deadline Extension</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod
+                            augue a
+                            justo
+                            porttitor, nec malesuada nisl feugiat.</p>
+                        <p class="card-text"><small class="text-muted">Posted on: MM/DD/YYYY</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <!-- Help and Support -->
+    <section id="support">
+        <div class="container">
+            <h2>Help and Support</h2>
+
+            <!-- Instructions -->
+            <div id="instructions">
+                <h3>How to Get Help</h3>
+                <p>If you need assistance or have any questions, follow these steps:</p>
+                <ol>
+                    <li>Check the <a href="#faq">FAQ</a> section for common questions and answers.</li>
+                    <li>Visit the <a href="#documentation">Documentation</a> for detailed information and guides.</li>
+                    <li>If you can't find the answer, contact our support team using the <a href="#contact-form">contact
+                            form</a>.</li>
+                </ol>
+            </div>
+
+            <!-- FAQ Section -->
+            <div id="faq">
+                <h3>FAQ (Frequently Asked Questions)</h3>
+                <ul>
+                    <li>
+                        <strong>Q: How do I register for a hackathon?</strong><br>
+                        A: To register for a hackathon, go to the registration page and follow the provided
+                        instructions.
+                    </li>
+                    <li>
+                        <strong>Q: Can I participate in multiple hackathons simultaneously?</strong><br>
+                        A: Yes, you can participate in multiple hackathons, but make sure to check the schedule and
+                        deadlines.
+                    </li>
+                    <!-- Add more FAQ items as needed -->
+                </ul>
+            </div>
+
+            <!-- Documentation Section -->
+            <div id="documentation">
+                <h3>Documentation</h3>
+                <p>Explore our comprehensive documentation for in-depth information and guides:</p>
+                <a href="#documentation-link" class="btn btn-primary">Go to Documentation</a>
+            </div>
+
+            <!-- Contact Form -->
+            <div id="contact-form">
+                <h3>Contact Support</h3>
+                <p>If you couldn't find the answer to your question, please use the contact form below:</p>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Your Name:</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email:</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message:</label>
+                        <textarea class="form-control" id="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback -->
+
+
+    <!-- Social Media -->
+
+
+
+
+
+    <div class="box" style="background-color:#151515 ;">
+        <header class="main-top2 page-header page-header-orange text-white">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-8">
+                        <div class="contact-links">
+                            <a href="mailto:contact@example.com"><i class="fas fa-envelope"></i> Email</a>
+                            <a href="https://www.instagram.com/example"><i class="fab fa-instagram"></i> Instagram</a>
+                            <a href="https://www.linkedin.com/in/example"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a href="https://github.com/example"><i class="fab fa-github"></i> GitHub</a>
+                            <p>&copy; 2023 Wikicoding. All rights reserved.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Automatically open the registration form
+            var formContainer = document.getElementById('registration-form-container');
+            formContainer.style.display = 'block';
+        });
+    </script>
+
+
+
+    <script>
+        function closeForm() {
+            var formContainer = document.getElementById('registration-form-container');
+            formContainer.style.display = 'none';
+        }
+
+        function submitForm() {
+            // Get values from the form
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+
+            // Save data to localStorage (you should replace this with a server-side solution)
+            var userData = {
+                name: name,
+                email: email
+            };
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            // Close the registration form
+            closeForm();
+        }
+    </script>
+
+
+    <script>
+        // Activate the carousel
+        $(document).ready(function () {
+            $('#imageCarousel').carousel();
+
+            // Set interval to change image every 5 seconds
+            setInterval(function () {
+                $('#imageCarousel').carousel('next');
+            }, 5000);
+        });
+    </script>
+
+</body>
+
+</html>

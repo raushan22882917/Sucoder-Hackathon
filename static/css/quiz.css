@@ -1,0 +1,25 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#result {
+    margin-top: 20px;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+.question {
+    display: none;
+}
+
+#questionContainer .question.active {
+    display: block;
+}

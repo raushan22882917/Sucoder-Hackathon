@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Computer Science Topics</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='assets/images/newback.png') }}");
+            background-repeat: no-repeat;
+            background-size: cover; /* This ensures the background image covers the entire body */
+        }
+
+        .box {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background-image: url("{{ url_for('static', filename='assets/images/newback.png') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+
+
+        }
+
+        /* Inner Styles */
+        .inner {
+            background-image: url("{{ url_for('static', filename='assets/images/blog.jpeg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 50px 0;
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;
+            border-radius:10px;
+        }
+
+        .inner h1 {
+            font-weight: bold;
+            font-size: 50px;
+            color: red;
+        }
+
+        /* Card Styles */
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .card-text {
+            color: #666;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Social media icons */
+        .social-icons a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <div class="inner">
+            <!-- Instruction for the reader -->
+            <h1>Welcome to Techanical and Science News</h1>
+            <p>Stay up-to-date with the latest news:</p>
+            <!-- Button to update news -->
+            <a href="{{'news'}}">
+                <button class="btn btn-primary">Update News</button>
+            </a>
+            <div class="thought">
+                <p>"In a world inundated with information, staying informed is the key to empowerment."</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <video controls autoplay loop muted class="card-img-top" alt="AI">
+                            <source src="{{ url_for('static', filename='/assets/video/ai.mp4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+
+                        <div class="card-body">
+                            <h5 class="card-title">Artificial Intelligence</h5>
+                            <p class="card-text">Explore the latest in AI and machine learning.</p>
+                            <!-- Assuming you have a Flask route named 'blog' with a parameter 'post_slug' -->
+                            <a href="{{ url_for('blogmaterial') }}" class="btn btn-primary">Read More</a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <video controls autoplay loop muted class="card-img-top" alt="AI">
+                            <source src="{{ url_for('static', filename='/assets/video/hacking.mp4') }}"
+                                type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+
+                        <div class="card-body">
+                            <h5 class="card-title">Cybersecurity & Ethical Hacking</h5>
+                            <p class="card-text">Explore cybersecurity threats and preventive measures.</p>
+                            <a href="#" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <video controls autoplay loop muted class="card-img-top" alt="AI">
+                            <source src="{{ url_for('static', filename='/assets/video/data.mp4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+
+                        <div class="card-body">
+                            <h5 class="card-title">Data Science & Big Data</h5>
+                            <p class="card-text">Discover insights into data analysis and big data.</p>
+                            <a href="#" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <video controls autoplay loop muted class="card-img-top" alt="AI">
+                            <source src="{{ url_for('static', filename='/assets/video/software.mp4') }}"
+                                type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+
+                        <div class="card-body">
+                            <h5 class="card-title">Software Development</h5>
+                            <p class="card-text">Explore programming languages and frameworks.</p>
+                            <a href="#" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <video controls autoplay loop muted class="card-img-top" alt="AI">
+                            <source src="{{ url_for('static', filename='/assets/video/cloud.mp4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="card-body">
+                            <h5 class="card-title">Cloud Computing & Infrastructure</h5>
+                            <p class="card-text">Learn about cloud services and security.</p>
+                            <a href="#" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <video controls autoplay loop muted class="card-img-top" alt="AI">
+                            <source src="{{ url_for('static', filename='/assets/video/internate.mp4') }}"
+                                type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+
+                        <div class="card-body">
+                            <h5 class="card-title">Internet of Things (IoT)</h5>
+                            <p class="card-text">Explore the interconnected world of IoT devices.</p>
+                            <a href="#" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <video controls autoplay loop muted class="card-img-top" alt="AI">
+                            <source src="{{ url_for('static', filename='/assets/video/vision.mp4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="card-body">
+                            <h5 class="card-title">Computer Vision & Image Processing</h5>
+                            <p class="card-text">Insights into computer vision and image processing.</p>
+                            <a href="#" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <video controls autoplay loop muted class="card-img-top" alt="AI">
+                            <source src="{{ url_for('static', filename='/assets/video/computing.mp4') }}"
+                                type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="card-body">
+                            <h5 class="card-title">Quantum Computing</h5>
+                            <p class="card-text">Exploration into the world of quantum computing.</p>
+                            <a href="#" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <footer>
+
+        <div class="social-icons">
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"> <i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"> <i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2023 Wikicoding. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

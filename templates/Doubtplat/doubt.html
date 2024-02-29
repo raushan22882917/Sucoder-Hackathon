@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Doubt Solver</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand img {
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333;
+        }
+
+        /* Main Content Styles */
+        .jumbotron {
+            color: #ffffff;
+        }
+
+        .jumbotron p {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            margin-bottom: 30px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .card-text {
+            font-size: 1rem;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        .footer p {
+            margin-bottom: 0;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .profile-box {
+            width: 60%;
+            height: 400px;
+            margin: 20px auto;
+            border: 2px solid #ccc;
+            overflow: auto;
+            display: none;
+            /* initially hide the profile box */
+        }
+
+        .profile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+            z-index: 1000; /* higher z-index for overlay */
+            display: none; /* initially hidden */
+        }
+        .profile-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            max-width: 800px; /* maximum width of the profile box */
+            height: 400px;
+            border: 2px solid #ccc;
+            background-color: #fff;
+            overflow: auto;
+            z-index: 1001; /* higher z-index than overlay */
+            display: none; /* initially hidden */
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+        .contact-availability-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .contact-availability-box h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-availability-box p {
+            margin-bottom: 10px;
+        }
+
+        .contact-availability-box .availability {
+            font-weight: bold;
+            color: green;
+        }
+
+        .contact-availability-box .unavailability {
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='/assets/images/logo.png') }}" width="30" height="30"
+                    class="d-inline-block align-top" alt="">
+                WikiCoding
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('indexchatbot')}}"><i class="fas fa-question-circle"></i> Ask a Doubt</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('solution')}}"><i class="fas fa-lightbulb"></i>Mentor Solutions</a>
+                    </li>
+                    <li class="nav-item">
+                        <h6 class="nav-link" onclick="toggleProfile()"><i class="fas fa-user"></i> Profile</h6>
+                        <div id="profile-overlay" class="profile-overlay">
+                        </div> 
+                        <div class="profile-box" id="profile-box">
+                            <button class="close-button" onclick="toggleProfile()">Close</button>
+
+                            <iframe src="{{url_for('profile_user')}}" frameborder="0"></iframe>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="display-4" style="color:black;">Welcome to WikiCoding Doubt Solver</h1>
+                <p class="lead" style="color:black;">Ask Doubt 24x7 Hours</p>
+                <a href="{{url_for('indexchatbot')}}" class="btn btn-primary" style="color:black;"><i class="fas fa-question"></i> Ask a Doubt</a>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Browse Solutions</h5>
+                            <p class="card-text">Explore our repository of solutions to common coding problems.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Connect With Videochat</h5>
+                            <p class="card-text">Stuck with a problem? Ask our community for help!</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="#" ><button type="button" class="btn btn-sm btn-outline-secondary">Ask Now</button></a>
+                                    <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Ask Now</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add this div for the profile box -->
+                <div id="profileBox" class="profile-box-container">
+                    <div class="profile-box">
+                        <h3 id="profileName"></h3>
+                        <p id="profileUserId"></p>
+                        <p id="profilePhoneNumber"></p>
+                        <p id="profileEmail"></p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Connect With Friend</h5>
+                            <p class="card-text">Share your coding wisdom by providing solutions to others.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Learn More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="contact-availability-box">
+        <h2>Contact & Availability</h2>
+        <p>If you have any questions or need assistance, feel free to contact us using the information below:</p>
+        <p>Email: example@example.com</p>
+        <p>Phone: +123 456 7890</p>
+        <p>Availability: <span class="availability">Available</span></p>
+        <p>Office Hours: Monday to Friday, 9:00 AM to 5:00 PM</p>
+        <p>For urgent inquiries outside office hours, please leave a message or send an email. We'll get back to you as soon as possible.</p>
+    </div>
+
+    <footer class="text-muted text-center">
+        <div class="container">
+            <p>&copy; 2024 WikiCoding. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // JavaScript code
+        $(document).ready(function () {
+            // Function to fetch mentor details when profile link is clicked
+            $('.nav-link-profile').click(function (e) {
+                e.preventDefault(); // Prevent default link behavior
+
+                var userId = "123"; // Replace "123" with the actual user ID
+                fetchMentorDetails(userId);
+
+                // Toggle visibility of profile box
+                $('#profileBox').toggle();
+            });
+
+            // Function to fetch mentor details from the server
+            function fetchMentorDetails(userId) {
+                // Make an AJAX request to fetch mentor details
+                $.ajax({
+                    url: '/get_mentor_details',
+                    type: 'POST',
+                    data: { userId: userId },
+                    success: function (response) {
+                        // Update profile box with mentor details
+                        $('#profileName').text(response.name);
+                        $('#profileUserId').text("User ID: " + response.userId);
+                        $('#profilePhoneNumber').text("Phone Number: " + response.phoneNumber);
+                        $('#profileEmail').text("Email: " + response.email);
+                    },
+                    error: function (error) {
+                        console.log('Error fetching mentor details:', error);
+                    }
+                });
+            }
+        });
+
+    </script>
+
+    <script>
+        function toggleProfile() {
+            var profileOverlay = document.getElementById('profile-overlay');
+            var profileBox = document.getElementById('profile-box');
+            if (profileOverlay.style.display === 'none' || profileBox.style.display === 'none') {
+                profileOverlay.style.display = 'block';
+                profileBox.style.display = 'block';
+            } else {
+                profileOverlay.style.display = 'none';
+                profileBox.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

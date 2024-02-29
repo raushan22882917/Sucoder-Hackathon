@@ -1,0 +1,14 @@
+[
+    {"id": 1, "question": "What is the capital of France?", "language": "Python"},
+    {"id": 2, "question": "Write a function to calculate the factorial of a number.", "language": "Python"},
+    {"id": 3, "question": "Explain the concept of object-oriented programming.", "language": "Python"},
+    {"id": 4, "question": "How does Python's garbage collection work?", "language": "Python"},
+    {"id": 5, "question": "What is the purpose of the 'self' keyword in Python?", "language": "Python"},
+    {"id": 6, "question": "Write a program to find the largest element in an array.", "language": "Python"},
+    {"id": 7, "question": "What is the difference between list and tuple in Python?", "language": "Python"},
+    {"id": 8, "question": "Explain the concept of inheritance in object-oriented programming.", "language": "Python"},
+    {"id": 9, "question": "How to handle exceptions in Python?", "language": "Python"},
+    {"id": 10, "question": "What is the use of the 'with' statement in Python?", "language": "Python"}
+  ]
+  
+  

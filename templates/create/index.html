@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+        }
+    </style>
+    <title>Quiz Admin</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Add Quiz Question</h2>
+        <form id="quizForm">
+            <div class="form-group">
+                <label for="questionText">Question:</label>
+                <input type="text" class="form-control" id="questionText" required>
+            </div>
+            <div class="form-group">
+                <label for="option1">Option 1:</label>
+                <input type="text" class="form-control" id="option1" required>
+            </div>
+            <div class="form-group">
+                <label for="option2">Option 2:</label>
+                <input type="text" class="form-control" id="option2" required>
+            </div>
+            <div class="form-group">
+                <label for="option3">Option 3:</label>
+                <input type="text" class="form-control" id="option3" required>
+            </div>
+            <div class="form-group">
+                <label for="option4">Option 4:</label>
+                <input type="text" class="form-control" id="option4" required>
+            </div>
+            <div class="form-group">
+                <label for="correctOption">Correct Option (1-4):</label>
+                <input type="number" class="form-control" id="correctOption" min="1" max="4" required>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addQuestion()">Add Question</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='/scripts/admin.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/<your-api-key>/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .quiz {
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #progress-bar {
+            width: 200px;
+            height: 10px;
+            margin: 0 15px;
+            background-color: #ccc;
+            border-radius: 5px;
+            display: flex;
+        }
+
+        #progress {
+            height: 100%;
+            width: 0;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .back {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: #007bff;
+            margin-right: 100px;
+            transition: color 0.3s ease;
+        }
+
+        .back:hover {
+            color: #0056b3;
+        }
+
+        .back-icon {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        thead th,
+        tbody td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        thead th {
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        textarea {
+            width: calc(100% - 16px);
+            height: 200px;
+            margin: 8px;
+            padding: 8px;
+            resize: none;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .codedemo,
+        .advcodedemo {
+            width: 100%;
+        }
+
+        .advcodedemo {
+            background-color: #f8f8f8;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz">
+        <div class="back align-center" onclick="prevStep()">
+            <span class="material-icons back-icon">chevron_left</span> Back
+        </div>
+        <button class="button" onclick="prevStep()">Create Quiz</button>
+        <div id="progress-bar">
+            <div id="progress"></div>
+        </div>
+        <button class="button">Add Question</button>
+    </div>
+    <div class="container mt-5">
+        <form id="registrationForm" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="opportunityType">Opportunity Type:</label>
+                <select class="form-control" name="opportunityType" required>
+                    <option value="General & Case Competitions">General & Case Competitions</option>
+                    <option value="Innovation Challenges">Innovation Challenges</option>
+                    <option value="Hackathons & Coding Challenges">Hackathons & Coding Challenges</option>
+                    <option value="Quizzes">Quizzes</option>
+                    <option value="Webinars & Workshops">Webinars & Workshops</option>
+                    <option value="Job">Job</option>
+                    <option value="Internship">Internship</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="instituteName">Enter Your Organisation
+                    :</label>
+                <input type="text" class="form-control" name="instituteName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image of Organize Type:</label>
+                <input type="file" class="form-control-file" name="image" accept="image/*" required>
+            </div>
+            <div class="container mt-5">
+                <h2>About Opportunity:</h2>
+                <textarea id="myEditor"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href=""><button class="button" onclick="nextStep()">Next</button></a>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        let currentStep = 0;
+        const progressBar = document.getElementById('progress');
+        const steps = 2;
+
+        function updateProgressBar() {
+            const percent = (currentStep / (steps - 1)) * 100;
+            progressBar.style.width = percent + '%';
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                updateProgressBar();
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < steps - 1) {
+                currentStep++;
+                updateProgressBar();
+            }
+        }
+
+
+        function updateProgressBar() {
+            const percent = (currentStep / (steps - 1)) * 100;
+            progressBar.style.width = percent + '%';
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                updateProgressBar();
+            } else {
+
+                history.back();
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < steps - 1) {
+                currentStep++;
+                updateProgressBar();
+            }
+        }
+    </script>
+
+    <script>
+        tinymce.init({
+            selector: '#myEditor',
+            height: 500,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | ' +
+                'bold italic backcolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat | help',
+            content_style: 'body { font-family: Arial, sans-serif; font-size: 14px; }'
+        });
+    </script>
+</body>
+
+</html>

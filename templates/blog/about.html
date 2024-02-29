@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Computer Science Blog</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            padding-top: 56px;
+        }
+
+        @media (min-width: 992px) {
+            body {
+                padding-top: 76px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Computer Science Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('blogs') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('abouts') }}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cont') }}">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Us Content -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <h2>About Us</h2>
+                <p>Welcome to the Computer Science Blog! We are passionate about sharing knowledge and insights in the field of computer science. Our goal is to provide valuable and informative content to our readers, whether you are a student, professional, or simply curious about the world of computing.</p>
+                <p>On this blog, you will find a variety of articles covering topics such as programming languages, algorithms, software development, artificial intelligence, and much more. Our team of experienced writers and contributors is dedicated to delivering high-quality and engaging content that can help you stay updated and enhance your understanding of computer science.</p>
+                <p>Thank you for visiting our blog, and we hope you find the information here both enjoyable and beneficial. If you have any questions or suggestions, feel free to reach out to us through our <a href="contact.html">contact page</a>.</p>
+
+                <!-- Team Cards -->
+                <div class="row mt-4">
+                    <!-- Card 1 -->
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Team Member 1">
+                            <div class="card-body">
+                                <h5 class="card-title">John Doe</h5>
+                                <p class="card-text">Lead Developer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Team Member 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Jane Smith</h5>
+                                <p class="card-text">Content Writer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="col-md-6 mt-4">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Team Member 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Alex Johnson</h5>
+                                <p class="card-text">Graphic Designer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="col-md-6 mt-4">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Team Member 4">
+                            <div class="card-body">
+                                <h5 class="card-title">Emily White</h5>
+                                <p class="card-text">Community Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            <div class="col-lg-4">
+                <div class="card my-4">
+                    <h5 class="card-header">Search</h5>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="button">Go!</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Categories</h5>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="#">Computer Science</a>
+                            </li>
+                            <!-- Add more categories here -->
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

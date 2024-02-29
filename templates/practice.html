@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        /* Add your custom styles here */
+        body {
+            padding-top: 56px;
+            /* Adjusted for Bootstrap fixed navbar */
+        }
+
+        .navbar {
+            background-color: #007bff;
+        }
+
+        .navbar-brand,
+        .navbar-nav a {
+            color: #fff;
+        }
+
+        .navbar-toggler-icon {
+            background-color: #fff;
+        }
+
+        .nav-item {
+            margin-right: 15px;
+        }
+
+        .nav-link i {
+            margin-right: 5px;
+        }
+
+        .nav-link .fas {
+            color: #ffc107;
+        }
+
+        .nav-link .fa-quote-right {
+            color: #28a745;
+        }
+        .nav-link:hover{
+            background-color: #151515;
+        }
+
+        /* Content Boxes */
+        .content-box {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .box-img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .box-title {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        .box-description {
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .read-more {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        .intro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 300px;
+        }
+
+        .left {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 320px;
+        }
+
+        .left h1 {
+            color: #007bff;
+        }
+
+        .left p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .right {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .right img {
+            max-width: 100%;
+            height: auto;
+            margin-left: 100px;
+        }
+
+
+        .right img:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .back {
+            width: 100%;
+            background-color: #151515;
+            color: white;
+        }
+
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border: 1px solid #d1d3e2;
+        }
+
+        .contact-links {
+            margin-top: 20px;
+        }
+
+        .contact-links a {
+            text-decoration: none;
+            color: white;
+            margin: 0 10px;
+        }
+    </style>
+    <title>Your Website</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='assets/images/logo.jpg') }}" alt="Logo" height="50"
+                class="d-inline-block align-top">
+
+            WiKiCoding
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+
+                    <a class="nav-link" href="{{ url_for('python') }}">
+                        <i class="fab fa-python"></i> Python
+                    </a>
+ 
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="fab fa-java"></i> Java
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="fab fa-cuttlefish"></i> C++
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="fas fa-code"></i> DSA
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="fas fa-database"></i> DBMS
+                    </a>
+                </li>
+                <!-- Add more navigation links as needed -->
+            </ul>
+        </div>
+    </nav>
+
+    <div class="intro">
+        <div class="left">
+            <h1>Python</h1>
+            <p>"Python exercise is not just a routine; it's a journey of logical exploration and creative
+                problem-solving. With every line of code, you sculpt your understanding, and with every challenge, you
+                refine your skills. Embrace the exercises, for in the dance of syntax and logic, you'll discover the
+                elegance and power that Python gracefully bestows upon those who persist in the art of coding."</p>
+        </div>
+        <div class="right">
+            <img src="{{ url_for('static', filename='assets/images/python_exercise.jpeg') }}" alt=""
+                style="height:280px;">
+
+        </div>
+
+    </div>
+
+
+    <div class="intro">
+        <div class="right">
+            <img src="{{ url_for('static', filename='assets/images/dsa.jpeg') }}" alt="" style="height:280px;">
+
+        </div>
+        <div class="left">
+            <h1>Data Structure and Algorithms</h1>
+            <p>"Embrace the challenge of Data Structures and Algorithms exercises, for in each problem lies an
+                opportunity to sharpen your problem-solving skills. Like a well-orchestrated symphony, the mastery of
+                DSA creates a harmonious interplay between logic and efficiency. Every exercise is a note, every
+                solution a melody – composing the symphony of computational excellence."</p>
+        </div>
+    </div>
+
+
+    <div class="back">
+        <h1>Coding Instructions</h1>
+
+        <ol>
+            <li>
+                <h3>Read the Prompt Carefully:</h3>
+                <p>
+                    Take the time to thoroughly understand the problem statement. Identify the input, output, and any
+                    constraints provided.
+                </p>
+                <p>
+                    <strong>Example:</strong> Read the prompt below and analyze the requirements:
+                </p>
+                <pre><code>
+              <strong>Prompt:</strong> Write a function to calculate the factorial of a number.
+            </code></pre>
+            </li>
+
+            <li>
+                <h3>Plan Your Approach:</h3>
+                <p>
+                    Before coding, outline your approach to solving the problem. Break the problem into smaller
+                    sub-problems if possible.
+                </p>
+                <p>
+                    <strong>Example:</strong> Outline your approach in pseudocode:
+                </p>
+                <pre><code>
+              <strong>Pseudocode:</strong>
+              function calculateFactorial(number):
+                if number is 0:
+                  return 1
+                else:
+                  return number * calculateFactorial(number - 1)
+            </code></pre>
+            </li>
+
+            <li>
+                <h3>Write Pseudocode:</h3>
+                <p>
+                    Draft pseudocode to outline the logic of your solution. Ensure that your pseudocode aligns with the
+                    problem requirements.
+                </p>
+                <p>
+                    <strong>Example:</strong> Use pseudocode to plan your solution before coding.
+                </p>
+                <pre><code>
+              <strong>Pseudocode:</strong>
+              function calculateFactorial(number):
+                if number is 0:
+                  return 1
+                else:
+                  return number * calculateFactorial(number - 1)
+            </code></pre>
+            </li>
+
+            <li>
+                <h3>Test Extensively:</h3>
+                <p>
+                    Test your code with a range of inputs, including boundary cases. Check for edge cases, large inputs,
+                    and unexpected scenarios.
+                </p>
+                <p>
+                    <strong>Example:</strong> Test your function with various inputs:
+                </p>
+                <pre><code>
+              <strong>Test Cases:</strong>
+              calculateFactorial(0) // Expected: 1
+              calculateFactorial(5) // Expected: 120
+              calculateFactorial(3) // Expected: 6
+            </code></pre>
+            </li>
+
+            <li>
+                <h3>Document Your Code:</h3>
+                <p>
+                    Provide clear comments explaining the logic behind your code. Make your code readable and
+                    understandable by others.
+                </p>
+                <p>
+                    <strong>Example:</strong> Add comments to explain your function.
+                </p>
+                <pre><code>
+              <strong>JavaScript Code:</strong>
+              // Function to calculate the factorial of a number
+              function calculateFactorial(number) {
+                if (number === 0) {
+                  return 1;
+                } else {
+                  return number * calculateFactorial(number - 1);
+                }
+              }
+            </code></pre>
+            </li>
+        </ol>
+    </div>
+
+
+
+    <div class="box" style="background-color: #151515;">
+        <header class="main-top2 page-header page-header-orange text-white">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-8">
+                        <h1>Get in Touch: Connect with Us | Let's Start the Conversation</h1>
+                        <p>For inquiries or support, contact us anytime</p>
+                        <div class="contact-links">
+                            <a href="mailto:contact@example.com"><i class="fas fa-envelope"></i> Email</a>
+                            <a href="https://www.instagram.com/example"><i class="fab fa-instagram"></i> Instagram</a>
+                            <a href="https://www.linkedin.com/in/example"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a href="https://github.com/example"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</body>
+
+</html>

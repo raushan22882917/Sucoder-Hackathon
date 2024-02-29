@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Data</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: transparent;
+        }
+
+        .container {
+            /* position: absolute; */
+            width: 100%;
+            height: 320px;
+        }
+
+
+
+        .card-deck {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .card {
+            border: none;
+            background-color: transparent;
+            height: 350px;
+            margin-right: 20px;
+            background-color: white;
+        }
+
+        .card-img-top {
+            height: 200px;
+            /* object-fit: cover; */
+        }
+
+        .card-body {
+            padding: 20px;
+            /* position: relative; */
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            /* margin-bottom: 10px; */
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+        }
+
+        .delete-btn,
+        .start-quiz-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .start-quiz-btn {
+            left: 10px;
+        }
+
+        .delete-btn {
+            right: 10px;
+        }
+
+        .nav-btn {
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            top: 50%;
+        }
+
+        .prev-btn {
+            left: 10px;
+            margin-top: 25px;
+            border-radius:20px ;
+        }
+
+        .next-btn {
+            right: 10px;
+            margin-top: 25px;
+            border-radius:20px ;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="card-deck" id="cardDeck">
+            {% for user in data %}
+            <div class="card">
+                <img src="{{ url_for('static', filename='uploads/' + user[5]) }}" class="card-img-top"
+                    alt="{{ user[5] }}">
+                <div class="card-body">
+                    <p class="card-text">
+                        <strong>Opportunity Type:</strong> {{ user[3] }}<br>
+                        <strong>Institute Name:</strong> {{ user[4] }}
+                    </p>
+                    <button class="start-quiz-btn" onclick="startQuiz('{{ user[0] }}')">
+                        <i class="fas fa-play"></i> Start Quiz
+                    </button>
+                    {% if user_is_admin %}
+                       
+                        <button class="delete-btn" onclick="deleteCard('{{ user[0] }}')">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <button class="nav-btn prev-btn" onclick="navigate('prev')">
+            <i class="fas fa-chevron-left"></i> Previous
+        </button>
+        <button class="nav-btn next-btn" onclick="navigate('next')">
+            Next <i class="fas fa-chevron-right"></i>
+        </button>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+
+    <script>
+        const cardDeck = document.getElementById('cardDeck');
+        let currentIndex = 0;
+
+        function deleteCard(userId) {
+            // Add logic to delete the card with the given userId
+            console.log('Delete card with user ID:', userId);
+        }
+
+        function startQuiz(userId) {
+            // Add logic to start the quiz for the user with the given userId
+            console.log('Start quiz for user ID:', userId);
+        }
+
+        function navigate(direction) {
+            const cardWidth = 420; // Adjusted card width including margin
+            const cardsPerPage = 2;
+            const totalCards = document.querySelectorAll('.card').length;
+            const maxIndex = totalCards - cardsPerPage;
+            
+            if (direction === 'next' && currentIndex < maxIndex) {
+                currentIndex += cardsPerPage;
+            } else if (direction === 'prev' && currentIndex > 0) {
+                currentIndex -= cardsPerPage;
+            }
+
+            const translateValue = -currentIndex * cardWidth;
+            cardDeck.style.transform = `translateX(${translateValue}px)`;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <title>Computer Science Blog</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add this line to include FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofP+caYixVXBO" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            padding-top: 56px;
+        }
+
+        @media (min-width: 992px) {
+            body {
+                padding-top: 76px;
+            }
+        }
+
+
+
+        .row {
+            position: relative;
+            text-align: center;
+        }
+
+        .Image {
+            width: 80%;
+            height: 150px;
+            border-radius: 20px;
+            margin-left: 10%;
+
+            display: block;
+        }
+
+        h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+
+        .delete_blog {
+            color: #dc3545;
+            text-decoration: none;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .delete_blog i {
+            margin-right: 5px;
+        }
+
+
+        .read {
+            margin-left: 80%;
+        }
+
+        .reads {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .reads:hover {
+            background-color: #ffffff;
+            color: black;
+        }
+
+        .blog_container {
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">WiKiCoding</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('blogs') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('abouts') }}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cont') }}">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="read">
+        <a class="nav-link" href="{{ url_for('uploadedblog') }}" style="background-color: #007bff; color: white; width:200px;">Read Uploaded Blog</a>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <img class="Image" src="{{ url_for('static', filename='images/blog.jpeg') }}" alt="">
+            <h1>Blog Platform</h1>
+        </div>
+        <!-- Add this code inside the existing form -->
+        <form action="/submit" method="post" enctype="multipart/form-data">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="content">Blog Content:</label>
+            <textarea id="content" name="content" rows="20" required></textarea>
+
+            <label for="file">Upload Document (PDF, DOC, DOCX):</label>
+            <input type="file" name="file" accept=".pdf,.doc,.docx">
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="blog_container">
+            <div>
+                {% for blog in blogs %}
+                <div class="blog">
+                    <h3>{{ blog[1] }} - {{ blog[2] }}</h3>
+                    <p>{{ blog[3] }}</p>
+
+                    <!-- Add a delete icon and link to trigger the deletion -->
+                    <a href="#" class="delete_blog" data-blog-id="{{ blog[0] }}"><i class="fas fa-trash-alt"></i>
+                        Delete</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <!-- Add JavaScript to handle the deletion -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var deleteLinks = document.querySelectorAll(".delete_blog");
+
+                deleteLinks.forEach(function (link) {
+                    link.addEventListener("click", function (event) {
+                        event.preventDefault();
+
+                        var blogId = link.getAttribute("data-blog-id");
+
+                        link.closest(".blog").remove();
+                    });
+                });
+            });
+        </script>
+
+    </div>
+    <!-- Blog Content -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <h2 class="mb-4">Latest Posts</h2>
+
+                <!-- Example Blog Post -->
+                <div class="card mb-4">
+                    <img class="card-img-top" src="{{ url_for('static', filename='images/placeholder.jpeg') }}"
+                        alt="Blog Post Image">
+                    <div class="card-body">
+                        <h2 class="card-title">Introduction to Computer Science</h2>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet urna
+                            nec nisi auctor tincidunt. Vestibulum euismod mi nec est fringilla, at sollicitudin felis
+                            accumsan...</p>
+                        <a href="#" class="btn btn-primary">Read More &rarr;</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Posted on January 1, 2023 by <a href="#">Author</a>
+                    </div>
+                </div>
+
+                <!-- More Blog Posts Go Here -->
+
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            <div class="col-lg-4">
+                <div class="card my-4">
+                    <h5 class="card-header">Search</h5>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="button">Go!</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Categories</h5>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="#">Computer Science</a>
+                            </li>
+                            <li>
+                                <a href="#">Programming</a>
+                            </li>
+                            <li>
+                                <a href="#">Web Development</a>
+                            </li>
+                            <li>
+                                <a href="#">Data Science</a>
+                            </li>
+                            <li>
+                                <a href="#">Artificial Intelligence</a>
+                            </li>
+                            <li>
+                                <a href="#">Cybersecurity</a>
+                            </li>
+                            <li>
+                                <a href="#">Mobile App Development</a>
+                            </li>
+                            <li>
+                                <a href="#">Machine Learning</a>
+                            </li>
+                            <li>
+                                <a href="#">Databases</a>
+                            </li>
+                            <li>
+                                <a href="#">Networking</a>
+                            </li>
+                            <li>
+                                <a href="#">Software Engineering</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+
+    <!-- Add JavaScript to handle the deletion and dynamically load blogs -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var deleteLinks = document.querySelectorAll(".delete_blog");
+            var blogContainer = document.querySelector(".blog_container");
+
+            // Function to handle blog deletion
+            function handleDelete(event) {
+                event.preventDefault();
+                var blogId = event.currentTarget.getAttribute("data-blog-id");
+
+                // Here you can add AJAX logic to delete the blog from the server
+                // For simplicity, I'm just removing it from the DOM in this example
+                event.currentTarget.closest(".blog").remove();
+            }
+
+            // Function to dynamically load blogs
+            function loadBlogs() {
+                // Here you can add AJAX logic to fetch blogs from the server
+                // For simplicity, I'm just adding a sample blog to the DOM in this example
+                var newBlog = document.createElement("div");
+                newBlog.classList.add("blog");
+                newBlog.innerHTML = `
+                <h3>New Blog Title</h3>
+                <p>This is the content of the new blog post. It can contain text, images, and more.</p>
+                <a href="#" class="delete_blog" data-blog-id="new-blog-id"><i class="fas fa-trash-alt"></i>Delete</a>
+            `;
+                newBlog.querySelector(".delete_blog").addEventListener("click", handleDelete);
+                blogContainer.appendChild(newBlog);
+            }
+
+            // Add click event listeners for delete links
+            deleteLinks.forEach(function (link) {
+                link.addEventListener("click", handleDelete);
+            });
+
+            // Add click event listener for the "Read Uploaded Blog" button
+            var readButton = document.querySelector(".reads");
+            readButton.addEventListener("click", function (event) {
+                event.preventDefault();
+                loadBlogs();
+            });
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='/scripts/script.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

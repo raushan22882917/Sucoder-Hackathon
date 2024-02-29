@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Question Status</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<style>
+    body {
+        background-image: url("{{ url_for('static', filename='assets/images/problem.jpg') }}");
+        background-repeat: no-repeat;
+        background-size: cover; /* This ensures the background image covers the entire body */
+    }
+    .container {
+        padding: 20px;
+    }
+    .level-easy {
+        color: green;
+    }
+    .level-medium {
+        color: blue;
+    }
+    .level-hard {
+        color: red;
+    }
+    #pagination{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <table id="questionTable" class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>S.No</th>
+                <th>Question</th>
+                <th>Company</th>
+                <th>Posted Date</th>
+                <th>Level</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="questionTableBody">
+            <!-- Table body will be populated dynamically -->
+        </tbody>
+    </table>
+
+    <div id="pagination" class="text-center">
+        <!-- Pagination links will be added dynamically -->
+    </div>
+
+</div>
+
+<script>
+    // Sample data (you can replace this with your actual data)
+    const questions = [
+        { question: "Find the maximum element in a stack.", company: "Google", postedDate: "2024-02-27", level: "Easy" },
+        { question: "Implement a queue using stacks.", company: "Facebook", postedDate: "2024-02-26", level: "Medium" },
+        { question: "Reverse a linked list.", company: "Amazon", postedDate: "2024-02-28", level: "Hard" },
+        { question: "Check if a string is a palindrome.", company: "Microsoft", postedDate: "2024-02-28", level: "Easy" },
+        { question: "Implement binary search in an array.", company: "Google", postedDate: "2024-02-27", level: "Medium" },
+        { question: "Sort an array using quicksort.", company: "Facebook", postedDate: "2024-02-26", level: "Hard" },
+        { question: "Find the factorial of a number using recursion.", company: "Amazon", postedDate: "2024-02-28", level: "Easy" },
+        { question: "Check if a number is prime.", company: "Microsoft", postedDate: "2024-02-27", level: "Medium" },
+        { question: "Find the shortest path in a graph using Dijkstra's algorithm.", company: "Google", postedDate: "2024-02-26", level: "Hard" },
+        { question: "Implement a binary search tree.", company: "Facebook", postedDate: "2024-02-28", level: "Medium" },
+        { question: "Graph Coloring Problem", company: "Amazon", postedDate: "2024-02-28", level: "Hard" },
+        { question: "Depth First Search (DFS) Algorithm", company: "Microsoft", postedDate: "2024-02-27", level: "Medium" },
+        { question: "Breadth First Search (BFS) Algorithm", company: "Google", postedDate: "2024-02-26", level: "Medium" },
+        { question: "Heap Data Structure", company: "Facebook", postedDate: "2024-02-28", level: "Hard" },
+        { question: "Floyd-Warshall Algorithm", company: "Amazon", postedDate: "2024-02-28", level: "Hard" }
+    ];
+
+    const pageSize = 10;
+    let currentPage = 1;
+
+    // Function to dynamically generate table rows for the current page
+    function generateTable() {
+        const tableBody = document.getElementById("questionTableBody");
+        tableBody.innerHTML = ""; // Clear existing content
+
+        const startIndex = (currentPage - 1) * pageSize;
+        const endIndex = Math.min(startIndex + pageSize, questions.length);
+
+        for (let i = startIndex; i < endIndex; i++) {
+            const question = questions[i];
+            const row = document.createElement("tr");
+            const postedDate = formatDate(question.postedDate);
+            row.innerHTML = `
+                <td>${i + 1}</td>
+                <td>${question.question}</td>
+                <td><i class="${getCompanyIconClass(question.company)}"></i> ${question.company}</td>
+                <td>${postedDate}</td>
+                <td><span class="level-${question.level.toLowerCase()}">${question.level}</span></td>
+                <td><button class="btn ${isActive(question.postedDate) ? 'btn-success' : 'btn-secondary'}" onclick="setStatus(${i})">${isActive(question.postedDate) ? 'Active' : 'Inactive'}</button></td>
+            `;
+            tableBody.appendChild(row);
+        }
+    }
+
+    // Function to get the appropriate Font Awesome icon class for the company
+    function getCompanyIconClass(company) {
+        switch (company.toLowerCase()) {
+            case 'google':
+                return 'fab fa-google';
+            case 'facebook':
+                return 'fab fa-facebook';
+            case 'amazon':
+                return 'fab fa-amazon';
+            case 'microsoft':
+                return 'fab fa-microsoft';
+            default:
+                return '';
+        }
+    }
+
+    // Function to check if the question is active or inactive based on the current date
+    function isActive(postedDate) {
+        const currentDate = new Date().toISOString().slice(0, 10);
+        return postedDate === currentDate;
+    }
+
+    // Function to toggle the status of the question
+    function setStatus(index) {
+        questions[index].status = !isActive(questions[index].postedDate);
+        generateTable(); // Re-render the table after status change
+    }
+
+    // Function to format the date in a more readable format
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    // Function to generate pagination links
+    function generatePagination() {
+        const pagination = document.getElementById("pagination");
+        pagination.innerHTML = "";
+
+        const totalPages = Math.ceil(questions.length / pageSize);
+        if (totalPages > 1) {
+            const previousPageLi = document.createElement("li");
+            previousPageLi.className = "page-item";
+            previousPageLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a>`;
+            pagination.appendChild(previousPageLi);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageLi = document.createElement("li");
+                pageLi.className = `page-item ${currentPage === i ? 'active' : ''}`;
+                pageLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${i})">${i}</a>`;
+                pagination.appendChild(pageLi);
+            }
+
+            const nextPageLi = document.createElement("li");
+            nextPageLi.className = "page-item";
+            nextPageLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a>`;
+            pagination.appendChild(nextPageLi);
+        }
+    }
+
+    // Function to change the current page
+    function changePage(page) {
+        if (page < 1 || page > Math.ceil(questions.length / pageSize)) {
+            return;
+        }
+        currentPage = page;
+        generateTable();
+        generatePagination();
+    }
+
+    // Initial table generation
+    generateTable();
+    generatePagination();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Platform</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .topic-container {
+            display: none;
+        }
+
+        .topic-container {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            color: #007bff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            margin: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .topic-container {
+                padding: 10px;
+            }
+
+            .btn-primary {
+                margin: 10px 0;
+            }
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .contact-links {
+            margin-top: 20px;
+        }
+
+        .contact-links a {
+            text-decoration: none;
+            color: white;
+            margin: 0 10px;
+        }
+
+        .h2 {
+            color: #151515;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Quiz Platform</h1>
+        <p>Click On course Get Quiz:</p>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-secondary" style="margin: 5px;"
+                onclick="showTopics('python')">Python</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;"
+                onclick="showTopics('java')">Java</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;" onclick="showTopics('ds')">Data
+                Structures</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;"
+                onclick="showTopics('dbms')">DBMS</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;"
+                onclick="showTopics('algo')">Algorithms</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;" onclick="showTopics('webdev')">Web
+                Development</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;" onclick="showTopics('ml')">Machine
+                Learning</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;" onclick="showTopics('netsec')">Network
+                Security</button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-secondary" style="margin: 5px;" onclick="showTopics('ai')">Artificial
+                Intelligence</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;"
+                onclick="showTopics('mobileapp')">Mobile App Development</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;" onclick="showTopics('os')">Operating
+                Systems</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;"
+                onclick="showTopics('computergraphics')">Computer Graphics</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;"
+                onclick="showTopics('softwareeng')">Software Engineering</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;"
+                onclick="showTopics('compnetworks')">Computer Networks</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;"
+                onclick="showTopics('dbdesign')">Database Design</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;"
+                onclick="showTopics('cybersecurity')">Cybersecurity</button>
+            <button type="button" class="btn btn-secondary" style="margin: 5px;"
+                onclick="showTopics('datascience')">Data Science</button>
+        </div>
+    </div>
+    <div class="container">
+
+        <div>
+            <input type="text" id="searchBar" class="form-control" placeholder="Search by topic...">
+        </div>
+        <div id="python-topics" class="topic-container">
+            <h3>Python Topics</h3>
+            <a href="{{ url_for('pythons') }}">
+                <button class="btn btn-primary" onclick="startQuiz('python', 'introduction')">Start Quiz - Introduction
+                    to
+                    Python</button></a>
+            <button class="btn btn-primary" onclick="startQuiz('python', 'variables')">Start Quiz - Variables and Data
+                Types</button>
+            <button class="btn btn-primary" onclick="startQuiz('python', 'control-flow')">Start Quiz - Control Flow
+                Statements</button>
+            <button class="btn btn-primary" onclick="startQuiz('python', 'functions')">Start Quiz - Functions</button>
+            <button class="btn btn-primary" onclick="startQuiz('python', 'lists')">Start Quiz - Lists and
+                Tuples</button>
+            <button class="btn btn-primary" onclick="startQuiz('python', 'dictionaries')">Start Quiz -
+                Dictionaries</button>
+            <button class="btn btn-primary" onclick="startQuiz('python', 'files')">Start Quiz - File Handling</button>
+            <button class="btn btn-primary" onclick="startQuiz('python', 'exceptions')">Start Quiz - Exceptions</button>
+            <!-- Add more topics as needed -->
+        </div>
+
+        <div id="java-topics" class="topic-container">
+            <h3>Java Topics</h3>
+            <button class="btn btn-primary" onclick="startQuiz('java', 'introduction')">Start Quiz - Introduction to
+                Java</button>
+            <button class="btn btn-primary" onclick="startQuiz('java', 'variables')">Start Quiz - Variables and Data
+                Types</button>
+            <button class="btn btn-primary" onclick="startQuiz('java', 'control-flow')">Start Quiz - Control Flow
+                Statements</button>
+            <button class="btn btn-primary" onclick="startQuiz('java', 'methods')">Start Quiz - Methods</button>
+            <button class="btn btn-primary" onclick="startQuiz('java', 'arrays')">Start Quiz - Arrays</button>
+            <button class="btn btn-primary" onclick="startQuiz('java', 'classes-objects')">Start Quiz - Classes and
+                Objects</button>
+            <button class="btn btn-primary" onclick="startQuiz('java', 'inheritance')">Start Quiz - Inheritance</button>
+            <button class="btn btn-primary" onclick="startQuiz('java', 'exceptions')">Start Quiz - Exceptions</button>
+            <!-- Add more topics as needed -->
+        </div>
+
+        <!-- Add more topic containers for other courses -->
+
+        <div id="quiz-container">
+            <!-- Quiz questions and options will be displayed here -->
+        </div>
+    </div>
+
+
+
+
+    <div class="box" style="background-color: #151515; margin-top:330px;">
+        <header class="main-top2 page-header page-header-orange text-white">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-8">
+                        <h1>Get in Touch: Connect with Us | Let's Start the Conversation</h1>
+                        <p>For inquiries or support, contact us anytime</p>
+                        <div class="contact-links">
+                            <a href="mailto:contact@example.com"><i class="fas fa-envelope"></i> Email</a>
+                            <a href="https://www.instagram.com/example"><i class="fab fa-instagram"></i> Instagram</a>
+                            <a href="https://www.linkedin.com/in/example"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a href="https://github.com/example"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        function showTopics(course) {
+            // Hide all topic containers
+            $('.topic-container').hide();
+            // Show the selected topic container
+            $(`#${course}-topics`).show();
+        }
+
+        function startQuiz(course, topic) {
+            // For simplicity, you can replace this with your actual quiz implementation
+            $('#quiz-container').html(`<h3>Quiz for ${course} - ${topic}</h3>`);
+            // Add your quiz questions and options here
+            // You can use AJAX to fetch questions from the server based on the selected course and topic
+        }
+    </script>
+
+
+    <script>
+        // Your JavaScript code here
+        document.getElementById('searchBar').addEventListener('input', function () {
+            filterTopics('python');
+            filterTopics('java');
+            // Add more courses as needed
+        });
+
+        function filterTopics(course) {
+            const searchValue = document.getElementById('searchBar').value.toLowerCase();
+            const buttons = document.getElementById(`${course}-topics`).querySelectorAll('button');
+
+            buttons.forEach(button => {
+                const buttonText = button.textContent.toLowerCase();
+                if (buttonText.includes(searchValue)) {
+                    button.style.display = 'inline-block';
+                    button.classList.add('matched-topic');
+                } else {
+                    button.style.display = 'none';
+                    button.classList.remove('matched-topic');
+                }
+            });
+        }
+
+        function startQuiz(course, topic) {
+            // Your quiz start logic here
+            console.log(`Starting quiz for ${course} - ${topic}`);
+        }
+    </script>
+
+
+
+</body>
+
+</html>

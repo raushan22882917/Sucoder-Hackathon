@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .btn-outline-secondary {
+            color: #6c757d;
+            background-color: #ffffff;
+            border-color: #6c757d;
+        }
+
+        .btn-outline-secondary:hover {
+            color: #ffffff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Edit Profile</h2>
+        <form method="post" action="{{ url_for('profile') }}">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstName">First Name *</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="firstName" name="firstName" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="editField('firstName')">Edit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="lastName">Last Name</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="lastName" name="lastName">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="editField('lastName')">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Username *</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="username" name="username" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="editField('username')">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <div class="input-group">
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="editField('email')">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="updateEmail">Update Email</label>
+                <div class="input-group">
+                    <input type="email" class="form-control" id="updateEmail" name="updateEmail">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="editField('updateEmail')">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile *</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="mobile" name="mobile" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="editField('mobile')">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pronouns">Pronouns</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="pronouns" name="pronouns">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="editField('pronouns')">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <div class="input-group">
+                    <select class="form-control" id="gender" name="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="editField('gender')">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="userType">User Type *</label>
+                <div class="input-group">
+                    <select class="form-control" id="userType" name="userType" required>
+                        <option value="student">Student</option>
+                        <option value="faculty">Faculty</option>
+                        <option value="staff">Staff</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="editField('userType')">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="course">Course *</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="course" name="course" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="editField('course')">Edit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="courseSpecialization">Course Specialization</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="courseSpecialization" name="courseSpecialization">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="editField('courseSpecialization')">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="courseProgramme">Course Programme</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="courseProgramme" name="courseProgramme">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="editField('courseProgramme')">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="courseDuration">Course Duration</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="courseDuration" name="courseDuration">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="editField('courseDuration')">Edit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="startYear">Start Year</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="startYear" name="startYear">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="editField('startYear')">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="organization">Organization/College *</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="organization" name="organization" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="editField('organization')">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="location" name="location">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="editField('location')">Edit</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="form-group social-group">
+              <label for="linkedin">LinkedIn</label>
+              <div class="input-group">
+                  <input type="text" class="form-control" id="linkedin" name="linkedin">
+                  <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" onclick="editField('linkedin')">Edit</button>
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-group social-group">
+              <label for="facebook">Facebook</label>
+              <div class="input-group">
+                  <input type="text" class="form-control" id="facebook" name="facebook">
+                  <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" onclick="editField('facebook')">Edit</button>
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-group social-group">
+              <label for="twitter">Twitter</label>
+              <div class="input-group">
+                  <input type="text" class="form-control" id="twitter" name="twitter">
+                  <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" onclick="editField('twitter')">Edit</button>
+                  </div>
+              </div>
+          </div> -->
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+
+    <script>
+        function editField(fieldName) {
+            var fieldInput = document.getElementById(fieldName);
+            var fieldValue = fieldInput.value;
+            var editedValue = prompt("Edit " + fieldName + ":", fieldValue);
+
+            if (editedValue !== null) {
+                fieldInput.value = editedValue;
+            }
+        }
+    </script>
+
+    <!-- Bootstrap JS and Popper.js (required for Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

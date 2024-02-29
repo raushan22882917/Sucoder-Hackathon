@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earning Page</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #191919;
+            margin: 0;
+        }
+
+        .container {
+            width: 800px;
+            background-color: white;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #007bff;
+            /* Blue color for heading */
+        }
+
+        table {
+            width: 400px;
+            /* Set table width to 600px */
+            margin: 0 auto 30px;
+            /* Center align table with bottom margin */
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            /* Blue header background */
+            color: #fff;
+            /* White text color */
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .earn-info {
+            margin-top: 50px;
+            background-color: #fff;
+            /* White background */
+            padding: 20px;
+            border-radius: 10px;
+            /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Shadow effect */
+            margin-bottom: 50px;
+            /* Add margin at the bottom */
+        }
+
+        .earn-info h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+            /* Blue color for heading */
+        }
+
+        .earn-info p {
+            text-align: justify;
+            /* Justify text alignment */
+            margin-bottom: 15px;
+            /* Add margin at the bottom */
+        }
+
+        .earn-info .icon {
+            font-size: 48px;
+            color: #007bff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .earn-info ol {
+            padding-left: 20px;
+        }
+
+        .earn-info p:last-child {
+            margin-bottom: 0;
+            /* Remove bottom margin for the last paragraph */
+        }
+
+        .total-earnings {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: dashed;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Ratings Data</h1>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Rating</th>
+                    <th>Answer ID</th>
+                    <th>Earning(per rating)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set total_earn = 0 %}
+                {% for row in ratings_data %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td style="color: #007bff;">₹{{ row[0] * 2 }}</td> <!-- Add ₹ symbol before earnings -->
+
+                    {% set total_earn = total_earn + (row[0] * 2) %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="earn-info">
+            <h2>Earn Money</h2>
+            <div class="icon">
+            </div>
+            <p>Thank you for participating in our rating system. Here's how you can earn money:</p>
+            <ol>
+                <li>Rate Answers: Provide ratings for the answers you come across. The better your ratings, the more you
+                    earn.</li>
+                <li>Quality Matters: Your earnings are based on the quality and accuracy of your ratings. Ensure to
+                    provide honest and insightful feedback.</li>
+                <li>Wait for Processing: After submitting your ratings, they undergo processing to determine your
+                    earnings.</li>
+                <li>Automatic Payment: Your earnings will be automatically processed and sent to your account after 7
+                    days.</li>
+            </ol>
+            <p>Your total earnings will be reflected in your account balance, accessible through your profile dashboard.
+            </p>
+            <p class="total-earnings">Total Widrawl: ₹{{ total_earn }}</p> <!-- Add ₹ symbol before total earnings -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</body>
+
+</html>

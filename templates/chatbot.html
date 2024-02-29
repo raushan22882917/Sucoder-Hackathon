@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample HTML Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-yKsDPtCnEw+KNDu6zlo5lEO3Gib0/05lFTVMofyjWNv2xrV4/XJn29uHDZjDI8bc" crossorigin="anonymous">
+  <style>
+
+    #openChatbotButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1001;
+      font-size: 20px;
+    }
+
+    #chat-container {
+      background-image: url("{{ url_for('static', filename='assets/images/chatbot.png') }}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 400px;
+      height: 600px;
+      overflow-y: auto;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1005;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #f9f9f9;
+      display: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    #chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      background-color: #007bff;
+      color: white;
+    }
+
+    #closeChatbot {
+      background-color: #dc3545; 
+      color: #fff; /* White text color */
+      padding: 10px 20px; /* Padding around the text */
+      border: none; /* No border */
+      border-radius: 5px; /* Rounded corners */
+      cursor: pointer; /* Show pointer cursor on hover */
+      font-size: 16px; 
+    }
+
+    #closeChatbot:hover {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    #chat-log {
+      margin: 0;
+      padding: 10px;
+      overflow-y: auto;
+      flex-grow: 1;
+    }
+
+    #user-input {
+      border-radius: 20px 0 0 20px;
+      font-size: 15px;
+      padding: 15px;
+      width: 75%;
+    }
+
+    #send-button {
+      border-radius: 0 20px 20px 0;
+      font-size: 15px;
+      padding: 15px 13px;
+    }
+
+    .input-group {
+      width: 100%;
+      align-self: flex-end;
+    }
+
+    .user-message {
+      background-color: #d6e0f0;
+      border-radius: 5px;
+      padding: 10px 20px;
+      margin: 5px 0;
+    }
+
+    .model-message {
+      background-color: #e3f2e9;
+      border-radius: 5px;
+      padding: 15px 20px;
+      margin: 5px 0;
+    }
+
+    pre {
+      background-color: #f8f9fa;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="openChatbotButton" class="btn btn-primary">Open Chatbot</button>
+
+  <!-- Chat container (hidden by default) -->
+  <div id="chat-container">
+    <button id="closeChatbot" class="btn btn-danger">Close</button>
+    <div id="chat-log"></div>
+    <div class="input-group">
+      <input type="text" id="user-input" class="form-control" placeholder="Type your message...">
+      <button id="send-button" class="btn btn-primary" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("openChatbotButton").addEventListener("click", function () {
+      // Show the chat container when the button is clicked
+      document.getElementById("chat-container").style.display = "block";
+    });
+
+    document.getElementById("closeChatbot").addEventListener("click", function () {
+      // Close the chat container when the "Close" button is clicked
+      document.getElementById("chat-container").style.display = "none";
+    });
+
+    function sendMessage() {
+      var userInput = document.getElementById("user-input").value;
+      document.getElementById("user-input").value = '';
+      document.getElementById("chat-log").innerHTML += "<p class='user-message'>You: " + userInput + "</p>";
+  
+      // Send user input to the server
+      fetch('/generate', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: 'user_input=' + userInput
+      })
+      .then(response => response.json())
+      .then(data => {
+          var modelResponse = data.response;
+          var messageBlock = document.createElement('div');
+          messageBlock.classList.add('model-message');
+          
+          // Check if the response starts with '*' (star)
+          if (modelResponse.startsWith('*')) {
+              // Remove the star and make the output heading bold
+              modelResponse = modelResponse.replace('*', '');
+              messageBlock.innerHTML = "<p><strong>" + modelResponse + "</strong></p>";
+          } else {
+              // If no star, check for code block
+              if (modelResponse.startsWith('```')) {
+                  // Code block detected, wrap in <pre><code> tags for syntax highlighting
+                  modelResponse = modelResponse.replace('```', '').trim(); // Remove starting ```
+                  modelResponse = modelResponse.replace('```', ''); // Remove ending ```
+                  messageBlock.innerHTML = "<pre><code>" + modelResponse + "</code></pre>";
+              } else {
+                  // No code block detected, display the response normally
+                  messageBlock.innerHTML = "<p>" + modelResponse + "</p>";
+              }
+          }
+          
+          document.getElementById("chat-log").appendChild(messageBlock);
+          // Scroll to bottom of chat log
+          document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
+      });
+  }
+  
+  
+  </script>
+  <script>
+    function sendMessage() {
+      var userInput = document.getElementById("user-input").value;
+      document.getElementById("user-input").value = '';
+      document.getElementById("chat-log").innerHTML += "<p class='user-message'>You: " + userInput + "</p>";
+  
+      // Send user input to the server
+      fetch('/generate', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: 'user_input=' + userInput
+      })
+      .then(response => response.json())
+      .then(data => {
+          var modelResponse = data.response;
+          var messageBlock = document.createElement('div');
+          messageBlock.classList.add('model-message');
+          
+          // Check if the response starts with '*' (star)
+          if (modelResponse.startsWith('*')) {
+              // Remove the stars from the beginning and end of the response
+              modelResponse = modelResponse.replace(/\*+/g, '');
+              // Display the response without stars
+              messageBlock.innerHTML = "<p><strong>" + modelResponse.trim() + "</strong></p>";
+          } else {
+              // If no stars, check for code block
+              if (modelResponse.startsWith('```')) {
+                  // Code block detected, wrap in <pre><code> tags for syntax highlighting
+                  modelResponse = modelResponse.replace('```', '').trim(); // Remove starting ```
+                  modelResponse = modelResponse.replace('```', ''); // Remove ending ```
+                  messageBlock.innerHTML = "<pre><code>" + modelResponse + "</code></pre>";
+              } else {
+                  // No code block detected, display the response normally
+                  messageBlock.innerHTML = "<p>" + modelResponse + "</p>";
+              }
+          }
+          
+          document.getElementById("chat-log").appendChild(messageBlock);
+          // Scroll to bottom of chat log
+          document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
+      });
+  }
+  
+  </script>
+  <script>
+    function sendMessage() {
+      var userInput = document.getElementById("user-input").value;
+      document.getElementById("user-input").value = '';
+      document.getElementById("chat-log").innerHTML += "<p class='user-message'>You: " + userInput + "</p>";
+  
+      // Send user input to the server
+      fetch('/generate', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: 'user_input=' + userInput
+      })
+      .then(response => response.json())
+      .then(data => {
+          var modelResponse = data.response;
+          var messageBlock = document.createElement('div');
+          messageBlock.classList.add('model-message');
+          
+          // Check if the response starts with '*' (star)
+          if (modelResponse.startsWith('*')) {
+              // Remove the stars from the beginning and end of the response
+              modelResponse = modelResponse.replace(/\*+/g, '');
+              // Display the response without stars
+              messageBlock.innerHTML = "<p><strong>" + modelResponse.trim() + "</strong></p>";
+          } else {
+              // If no stars, check for code block
+              if (modelResponse.startsWith('```')) {
+                  // Code block detected, wrap in <pre><code> tags for syntax highlighting
+                  modelResponse = modelResponse.replace('```', '').trim(); // Remove starting ```
+                  modelResponse = modelResponse.replace('```', ''); // Remove ending ```
+                  messageBlock.innerHTML = "<pre><code>" + modelResponse + "</code></pre>";
+              } else {
+                  // No code block detected, display the response with MathJax rendering
+                  messageBlock.innerHTML = "<p>" + modelResponse + "</p>";
+                  MathJax.typeset(); // Render MathJax equations
+              }
+          }
+          
+          document.getElementById("chat-log").appendChild(messageBlock);
+          // Scroll to bottom of chat log
+          document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
+      });
+  }
+  
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- TinyMCE JS -->
+    <script src="https://cdn.tiny.cloud/1/YOUR_TINYMCE_API_KEY/tinymce/5/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='assets/images/doubt.jpeg') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            animation-name: imageCycle;
+            animation-duration: 20s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            font-family: 'Arial', sans-serif;
+
+        }
+
+        @keyframes imageCycle {
+            0% {
+                background-image: url("{{ url_for('static', filename='assets/images/doubt.jpeg') }}");
+            }
+
+            100% {
+                background-image: url("{{ url_for('static', filename='assets/images/doubt2.jpeg') }}");
+            }
+
+        }
+
+        /* Add your custom styles here */
+
+        /* Fixed button in the bottom-right corner */
+        .fixed-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            /* Ensure the button is on top of other elements */
+        }
+
+        /* Optional: Style for the button */
+        .fixed-button a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .fixed-button button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .fixed-button button:hover {
+            background-color: #0056b3;
+        }
+
+        .button {
+
+            width: 140px;
+            background-color: #0056b3;
+            color: white;
+            border-radius: 5px;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+
+        }
+
+        .button button {
+            color: white;
+        }
+
+        .button button:hover {
+            color: white;
+            background-color: #05c7e9;
+        }
+
+        /* CSS for the red box */
+        .red-box {
+            display: none;
+            width: 800px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        /* CSS for the close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .payment-box {
+            width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #191919;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            margin-top: 0;
+            color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            margin-top: 10px;
+        }
+
+        h2 {
+            margin-top: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        p {
+            margin-bottom: 5px;
+            color: white;
+        }
+        #registrationForm {
+            display: none;
+            width: 600px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: black;
+        }
+    
+        #registrationForm label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    
+        #registrationForm input[type="text"],
+        #registrationForm input[type="email"],
+        #registrationForm select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+        }
+    
+        #registrationForm button[type="submit"],
+        #registrationForm button[type="button"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: black;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    
+        #registrationForm button[type="submit"]:hover,
+        #registrationForm button[type="button"]:hover {
+            background-color: #45a049;
+        }
+    
+        /* Styles for the close button */
+        #closeFormBtn {
+            float: right;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    
+        #closeFormBtn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container mt-4">
+
+        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addQuestionModal">
+            Add Question
+        </button>
+
+        <div class="modal fade" id="addQuestionModal" tabindex="-1" role="dialog"
+            aria-labelledby="addQuestionModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addQuestionModalLabel">Add a New Question</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/add_question" method="post">
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="field">Field:</label>
+                                <input type="text" class="form-control" id="field" name="field" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="question">Question:</label>
+                                <textarea class="form-control" id="question" name="question" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Add Question</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ul class="list-group">
+            {% for q in questions %}
+            <li class="list-group-item">
+                <strong>{{ q[1] }}</strong> - {{ q[3] }}
+                <!-- Inside the loop where questions are displayed -->
+                <a href="{{url_for('doubt')}}">
+                    <button type="button" class="btn btn-success float-right">
+                        Give Response
+                    </button></a>
+
+
+                <!-- Modal for response -->
+                <div class="modal fade" id="responseModal{{ q[0] }}" tabindex="-1" role="dialog"
+                    aria-labelledby="responseModalLabel{{ q[0] }}" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="responseModalLabel{{ q[0] }}">Response to {{ q[1] }}'s
+                                    question</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <textarea class="form-control response-editor" rows="5"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save Response</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="button">
+        <a href="{{ url_for('mentor_reg')}}">
+        <button class="btn" id="becomeMentorBtn">Become Mentor</button></a>
+    </div>
+    <div class="button" style="margin-left: 200px; width:200px;">
+        <a href="{{ url_for('mentlog')}}">
+        <button class="btn" id="becomeMentorBtn">Mentor Give Response</button></a>
+    </div>
+    
+    
+    <div class="fixed-button">
+        <button class="btn" id="openBtn">Take Help From Mentor</button>
+
+        <div id="redBox" class="red-box">
+            <span class="close-btn" id="closeBtn">CLOSE</span>
+
+            <div id="payment-box" class="payment-box">
+                <h3>New User Registration</h3>
+                <p>If you're new and seeking assistance, register below:</p>
+                <a href="{{url_for('mentor_form')}}">
+                    <button>Register and Make Payment</button></a>
+                <h2>OR</h2>
+                <h3>Existing User Sign In</h3>
+                <p>If you're already registered, sign in using your Unique User ID:</p>
+                {% if error %}
+                <p style="color: red;">{{ error }}</p>
+                {% endif %}
+                <form method="POST" action="/login">
+                    <input type="text" id="unique_id" name="unique_id"><br>
+                    <input type="submit" value="Login">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script>
+        // JavaScript to open and close the red box
+        document.getElementById("openBtn").addEventListener("click", function () {
+            document.getElementById("redBox").style.display = "block";
+        });
+
+        document.getElementById("closeBtn").addEventListener("click", function () {
+            document.getElementById("redBox").style.display = "none";
+        });
+    </script>
+</body>
+
+
+</html>

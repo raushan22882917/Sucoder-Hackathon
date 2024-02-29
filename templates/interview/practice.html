@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Interview Preparation</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+
+
+        nav a {
+            color: rgb(14, 13, 13) !important;
+        }
+
+        /* Add your existing navbar styles here */
+
+        .navbar-collapse {
+            display: flex;
+            justify-content: flex-end;
+            /* Align the button to the right */
+            align-items: center;
+        }
+
+        button {
+            margin-right: 10px;
+            /* Adjust the margin as needed */
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+
+        #imageContainer {
+            position: relative;
+            display: flex;
+            background-image: linear-gradient(to right, #CC95C0 0%, #DBD4B4 51%, #CC95C0 100%);
+
+
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+
+        .img {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            opacity: 0.6;
+            border-radius: 50px;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            background-image: url('{{ url_for("static", filename="/assets/images/practice.jpeg") }}');
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+
+        .img:hover .overlay {
+            opacity: 1;
+        }
+
+
+        .overlay h1 {
+            font-size: 200px;
+            margin: 0;
+            background-size: cover;
+            background-position: center;
+            color: transparent;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .social-media {
+            margin-top: 10px;
+        }
+
+        .social-media a {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .social-media img {
+            width: 30px;
+            /* Adjust the size of your social media icons */
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">WiKiCoding</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <a href=""><button>back</button></a>
+        </div>
+    </nav>
+    <div id="imageContainer">
+        <div class="img">
+            <img src="{{ url_for('static', filename='/assets/images/img1.jpeg') }}" alt="Image 1" class="img">
+            <div class="overlay">
+                <h1>practice</h1>
+            </div>
+        </div>
+
+        <div class="img">
+            <img src="{{ url_for('static', filename='/assets/images/img2.jpeg') }}" alt="Image 2" class="img">
+            <div class="overlay">
+                <h1>practice</h1>
+            </div>
+        </div>
+
+        <div class="img">
+            <img src="{{ url_for('static', filename='/assets/images/img3.jpeg') }}" alt="Image 3" class="img">
+            <div class="overlay">
+                <h1>practice</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Coding Interview Preparation</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Resource</th>
+                    <th>Description</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Add more rows as needed -->
+                <tr>
+                    <td>LeetCode</td>
+                    <td>Practice coding problems</td>
+                    <td><a href="https://leetcode.com/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>HackerRank</td>
+                    <td>10 Days of JavaScript tutorials</td>
+                    <td><a href="https://www.hackerrank.com/domains/tutorials/10-days-of-javascript"
+                            target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>CodeSignal</td>
+                    <td>Improve coding skills and prepare for interviews</td>
+                    <td><a href="https://codesignal.com/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>GeeksforGeeks</td>
+                    <td>Computer Science portal for geeks</td>
+                    <td><a href="https://www.geeksforgeeks.org/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>Codeforces</td>
+                    <td>Competitive programming platform</td>
+                    <td><a href="https://codeforces.com/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>TopCoder</td>
+                    <td>Competitive programming and design challenges</td>
+                    <td><a href="https://www.topcoder.com/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>InterviewBit</td>
+                    <td>Prepare for coding interviews</td>
+                    <td><a href="https://www.interviewbit.com/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>HackerEarth</td>
+                    <td>Programming challenges and hackathons</td>
+                    <td><a href="https://www.hackerearth.com/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>Codewars</td>
+                    <td>Train on coding challenges</td>
+                    <td><a href="https://www.codewars.com/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>Exercism</td>
+                    <td>Code practice and mentorship</td>
+                    <td><a href="https://exercism.io/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>CodeChef</td>
+                    <td>Competitive programming platform</td>
+                    <td><a href="https://www.codechef.com/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>Pramp</td>
+                    <td>Mock interviews and coding practice</td>
+                    <td><a href="https://www.pramp.com/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>CareerCup</td>
+                    <td>Interview questions and solutions</td>
+                    <td><a href="https://www.careercup.com/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>LeetCode Discuss</td>
+                    <td>Discuss coding problems with the community</td>
+                    <td><a href="https://leetcode.com/discuss/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>CodeJam</td>
+                    <td>Google's coding competition</td>
+                    <td><a href="https://codingcompetitions.withgoogle.com/codejam" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>InterviewCake</td>
+                    <td>Learn and practice coding interviews</td>
+                    <td><a href="https://www.interviewcake.com/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>Project Euler</td>
+                    <td>Math-based programming challenges</td>
+                    <td><a href="https://projecteuler.net/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>Glassdoor</td>
+                    <td>Company reviews and interview insights</td>
+                    <td><a href="https://www.glassdoor.com/Interview/index.htm" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>Interviewing.io</td>
+                    <td>Practice technical interviews with engineers</td>
+                    <td><a href="https://interviewing.io/" target="_blank">Link</a></td>
+                </tr>
+                <tr>
+                    <td>CodinGame</td>
+                    <td>Learn programming through games</td>
+                    <td><a href="https://www.codingame.com/" target="_blank">Link</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <footer>
+        <div class="social-media">
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <!-- Add more social media icons as needed -->
+        </div>
+        <p>&copy; 2024 Your Website. All rights reserved.</p>
+    </footer>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Number of links to display per page
+            const linksPerPage = 10;
+
+            // Array of all links
+            const allLinks = [
+                // Add all your links here
+            ];
+
+            // Get the table and button elements
+            const linkTable = document.getElementById('linkTable');
+            const nextBtn = document.getElementById('nextBtn');
+
+            // Function to display links based on current page
+            function displayLinks(page) {
+                const startIndex = (page - 1) * linksPerPage;
+                const endIndex = startIndex + linksPerPage;
+                const linksToShow = allLinks.slice(startIndex, endIndex);
+
+                // Clear existing rows
+                linkTable.querySelector('tbody').innerHTML = '';
+
+                // Display new rows
+                linksToShow.forEach(link => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                    <td>${link.resource}</td>
+                    <td>${link.description}</td>
+                    <td><a href="${link.link}" target="_blank">${link.link}</a></td>
+                `;
+                    linkTable.querySelector('tbody').appendChild(row);
+                });
+            }
+
+            // Initial display on page load
+            displayLinks(1);
+
+            // Event listener for the "Next" button
+            let currentPage = 1;
+            nextBtn.addEventListener('click', function () {
+                currentPage++;
+                displayLinks(currentPage);
+
+                // Hide or show the "Next" button based on the remaining links
+                if (currentPage * linksPerPage >= allLinks.length) {
+                    nextBtn.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+    <script>
+        // JavaScript for image rotation
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentIndex = 0;
+            const images = document.querySelectorAll('#imageContainer img');
+
+            function showImage(index) {
+                images.forEach(img => img.style.display = 'none');
+                images[index].style.display = 'block';
+            }
+
+            function rotateImages() {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            }
+
+            // Initial display
+            showImage(currentIndex);
+
+            // Rotate images every 5 seconds
+            setInterval(rotateImages, 5000);
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the button and add an event listener
+            var backButton = document.querySelector('.navbar-collapse button');
+
+            backButton.addEventListener('click', function () {
+                // Add your logic to handle the back button click
+                // For example, you can use window.history.back() to go back one step in the browser history
+                window.history.back();
+            });
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>

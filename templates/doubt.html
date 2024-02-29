@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Answer</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY5VlMOBO9AgqF5G70M5pGFCGCD8F3iGLE27eN" crossorigin="anonymous">
+
+    <script src="https://cdn.tiny.cloud/1/vtfd4vam8ve5fnuv7b1at8ehj5jy2pctfkofmu211f7uvqld/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
+
+
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='assets/images/doubt.jpeg') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            animation-name: imageCycle;
+            animation-duration: 20s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            font-family: 'Arial', sans-serif;
+
+        }
+
+        @keyframes imageCycle {
+            0% {
+                background-image: url("{{ url_for('static', filename='assets/images/doubt.jpeg') }}");
+            }
+
+            100% {
+                background-image: url("{{ url_for('static', filename='assets/images/doubt2.jpeg') }}");
+            }
+
+        }
+    </style>
+
+    <!-- TinyMCE configuration -->
+    <script>
+        tinymce.init({
+            selector: 'textarea#answerEditor'
+          });
+    </script>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1>Share Your Answer</h1>
+
+        <!-- Button to trigger modal for sharing an answer -->
+        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#shareAnswerModal">
+            Share Your Answer
+        </button>
+
+        <!-- Modal for sharing an answer -->
+        <div class="modal fade" id="shareAnswerModal" tabindex="-1" role="dialog"
+            aria-labelledby="shareAnswerModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="shareAnswerModalLabel">Share Your Answer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <textarea id="answerEditor"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="shareAnswerBtn">Share Your Answer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="mt-4">Shared Answers</h2>
+        <div class="row">
+            {% for answer in answers %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">{{ answer[1] }}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+
+
+                        <button type="button" class="btn btn-outline-primary" onclick="editResponse({{ answer[0] }})"
+                            data-toggle="modal" data-target="#editResponseModal">
+                            Edit Response
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+
+        </script>
+
+    <!-- Modal for editing response -->
+    <div class="modal fade" id="editResponseModal" tabindex="-1" role="dialog" aria-labelledby="editResponseModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editResponseModalLabel">Edit Response</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea id="editedResponseEditor"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveEditedResponseBtn">Save Response</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to handle sharing an answer
+        document.getElementById('shareAnswerBtn').addEventListener('click', function () {
+            var sharedAnswer = tinymce.get('answerEditor').getContent();
+
+            // Send the shared answer to the server and store it in the database
+            fetch('/share_answer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'shared_answer=' + encodeURIComponent(sharedAnswer),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Update the UI with the shared answers
+                    var sharedAnswersList = document.getElementById('sharedAnswers');
+                    var div = document.createElement('div');
+                    div.className = 'col-md-4 mb-4';
+                    div.innerHTML = `
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text">${data.answer}</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+
+                            <button type="button" class="btn btn-outline-primary" onclick="editResponse(${data.id})" data-toggle="modal" data-target="#editResponseModal">
+                                Edit Response
+                            </button>
+                        </div>
+                    </div>
+                `;
+                    sharedAnswersList.appendChild(div);
+
+                    // Clear the TinyMCE editor content
+                    tinymce.get('answerEditor').setContent('');
+
+                    // Close the modal
+                    $('#shareAnswerModal').modal('hide');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+
+        // Function to fetch shared answers from the server
+        function fetchSharedAnswers() {
+            fetch('/get_shared_answers')
+                .then(response => response.json())
+                .then(data => {
+                    // Update the UI with the fetched shared answers
+                    var sharedAnswersList = document.getElementById('sharedAnswers');
+                    sharedAnswersList.innerHTML = '';
+
+                    data.answers.forEach(function (answer) {
+                        var div = document.createElement('div');
+                        div.className = 'col-md-4 mb-4';
+                        div.innerHTML = `
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text">${answer[1]}</p>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+
+                                <button type="button" class="btn btn-outline-primary" onclick="editResponse(${answer[0]})" data-toggle="modal" data-target="#editResponseModal">
+                                    Edit Response
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                        sharedAnswersList.appendChild(div);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Fetch shared answers when the page loads
+        fetchSharedAnswers();
+
+        // Function to handle liking an answer
+        function likeAnswer(answerId) {
+            fetch(`/like_answer/${answerId}`, {
+                method: 'POST',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Update the like count in the UI
+                    var likeCountSpan = document.getElementById(`likeCount${answerId}`);
+                    likeCountSpan.textContent = data.likes;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Function to handle editing a response
+        function editResponse(answerId) {
+            // Fetch the existing response for editing
+            fetch(`/get_answer/${answerId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Set the existing response in the TinyMCE editor
+                    tinymce.get('editedResponseEditor').setContent(data.answer);
+
+                    // Add a click event listener to the Save Response button
+                    document.getElementById('saveEditedResponseBtn').addEventListener('click', function () {
+                        var editedResponse = tinymce.get('editedResponseEditor').getContent();
+
+                        // Send the edited response to the server and update the UI
+                        fetch(`/edit_response/${answerId}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: 'edited_response=' + encodeURIComponent(editedResponse),
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                // Update the UI with the edited response
+                                var cardText = document.querySelector(`#sharedAnswers .col-md-4:nth-child(${data.index + 1}) .card-text`);
+                                cardText.textContent = data.answer;
+
+                                // Clear the TinyMCE editor content
+                                tinymce.get('editedResponseEditor').setContent('');
+
+                                // Close the modal
+                                $('#editResponseModal').modal('hide');
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='quiz.css')}}">
+    <style>
+        /* Additional CSS Styles */
+        body {
+            background-color: #f8f9fa; /* Bootstrap background color */
+            color: #343a40; /* Bootstrap text color */
+            background-image: url("{{ url_for('static', filename='assets/images/quizback.jpg') }}");
+
+        }
+        .container {
+            background-color: #fff; /* White background for container */
+            padding: 20px; /* Add padding */
+            border-radius: 10px; /* Rounded corners for container */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+            margin-top:100px;
+        }
+        h1 {
+            color: #007bff; /* Bootstrap primary color */
+        }
+        p {
+            font-size: 18px; /* Increase font size for instructions */
+        }
+        .btn-start {
+            margin-top: 20px; /* Add margin at the top of the start button */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Welcome to the WikiCoding Challenge Quiz</h1>
+        <p>This quiz will test your knowledge on various subjects. You will have a set amount of time to complete the quiz.</p>
+        <p>Once you start the quiz, the timer will begin counting down. Make sure to answer all the questions before time runs out!</p>
+        <button class="btn btn-primary btn-start" onclick="startQuiz()">Start Quiz</button>
+        <div id="quizContent" style="display: none;">
+            <div id="timerDisplay" class="text-center mt-4"></div> <!-- Timer display -->
+            <form id="quizForm" class="mt-4">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                {% for question in questions %}
+                <div class="question mb-4">
+                    <p>{{ question.text }}</p>
+                    {% for option in question.options %}
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="{{ option }}" name="{{ question.id }}" value="{{ option }}" required>
+                        <label class="form-check-label" for="{{ option }}">{{ option }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div id="result" class="mt-4"></div> <!-- Result display -->
+        <div class="mt-4">
+            <a href="{{ url_for('leaderboard')}}" class="btn btn-secondary">View Leader Board</a>
+        </div>
+    </div>
+
+    <script>
+        // Timer functionality
+        const timerDisplay = document.getElementById('timerDisplay');
+        const quizForm = document.getElementById('quizForm');
+        const resultDisplay = document.getElementById('result');
+        const quizContent = document.getElementById('quizContent');
+        const btnStart = document.querySelector('.btn-start');
+        const timerDuration = 10; // 10 seconds for demonstration, change it to 600 for 10 minutes
+        let timeLeft = timerDuration;
+
+        function startQuiz() {
+            btnStart.style.display = 'none'; // Hide the start button
+            quizContent.style.display = 'block'; // Show the quiz content
+            const countdownTimer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.innerHTML = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(countdownTimer);
+                    submitQuiz();
+                    resultDisplay.innerHTML = '<div class="alert alert-danger" role="alert">Time is over! Quiz submitted.</div>';
+                }
+            }, 1000);
+        }
+
+        // Submit quiz function
+        function submitQuiz() {
+            const formData = new FormData(quizForm);
+            fetch('/resultsubmit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                resultDisplay.innerHTML = `<div class="alert alert-success" role="alert">Congratulations! Your score: ${data.score}</div>`;
+            });
+        }
+
+        // Submit quiz on form submit
+        quizForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            clearInterval(countdownTimer); // Stop the timer when the form is submitted
+            submitQuiz();
+        });
+    </script>
+    <script src="{{ url_for('static', filename='server.js')}}"></script>
+    
+</body>
+</html>

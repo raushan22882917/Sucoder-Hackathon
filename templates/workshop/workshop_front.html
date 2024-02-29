@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Development Program</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .intro-section {
+            padding: 100px 0;
+            background-color: #f7f7f7;
+        }
+
+        .intro-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s;
+        }
+
+        .intro-image:hover {
+            transform: scale(1.05);
+        }
+
+        .intro-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .intro-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-weight: 600;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: green;
+        }
+
+        .intro-content h2 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            width: 100%;
+            height: auto;
+            border: 3px solid black;
+        }
+
+        .intro-content p {
+            font-size: 18px;
+        }
+
+        .box:hover {
+            transition: 0.3s;
+        }
+
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            width: 100%;
+            height: auto;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+
+        .HeroScreen__StyledHeroScreen-pyzafk-0 {
+            background-color: #f4f4f4;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 20px 0;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .sign-up-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .sign-up-button:hover {
+            background-color: #0056b3;
+        }
+
+        figure {
+            margin: 20px 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .outer {
+            width: 45%;
+        }
+
+        .inner {
+            width: 45%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-top {
+            /* background-color: #007bff; */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .main-top1 {
+            /* background-color: #4CAF50; */
+            color: black;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .main-top2 {
+            background-color: #151515;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .contact-links {
+            margin-top: 20px;
+        }
+
+        .contact-links a {
+            text-decoration: none;
+            color: white;
+            margin: 0 10px;
+        }
+
+        .h2 {
+            color: #151515;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div style="display: flex;">
+                <div><img src="{{ url_for('static', filename='/assets/images/logo.png') }}" alt=""
+                        style="width: 50px; height: 50px;"></div>
+
+                <div style="margin-left: 10px;"><a class="navbar-brand" href="#">WiKiCoding</a></div>
+            </div>
+            <!-- <a class="navbar-brand" href="#">WiKiCoding</a> -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <!-- templates/index.html -->
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('workshops') }}">Workshops</a>
+                    </li>
+
+                    <!-- templates/index.html -->
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('project') }}">Projects</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('carrier') }}">Career Guidance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contacts') }}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+
+
+    <div class="box">
+        <header class="main-top page-header page-header-blue text-white">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-8">
+                        <h1 class="h2">EPICENTRE PROJECT: Cluster to Cluster workshop | Product and service launch:
+                            making things happen</h1>
+                        <p style="color: #151515;">Virtual event<br>10 July 2023 - 10 July 2023</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <div class="box">
+        <section class="HeroScreen__StyledHeroScreen-pyzafk-0 inMICS">
+            <div class="center">
+                <div class="outer">
+                    <h1>Learn programming by building projects</h1>
+                    <p>Improve your programming skills by working on real-world projects. Join our free community to
+                        discuss projects, review code, and learn from peers and mentors.</p>
+                    <button data-track="homepage-hero-cta" class="ui__sc-1mmo7mk-0 dRiQob sign-up-button">
+                        <a href="{{ url_for('project') }}"><span style="color: white; background-color: #007bff;">Start
+                                building projects</span></a>
+                    </button>
+                </div>
+                <div class="inner">
+                    <figure>
+                        <img src="https://dp-cdn.codementor.io/images/home/hero-image.png" width="600" height="329"
+                            alt="Find coding projects on DevProjects">
+                    </figure>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="box">
+        <header class="main-top1 page-header page-header-green text-white">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-8">
+                        <h1 class="h2">Guidance Hub: Empowering You | Mentorship and Support for Your Journey</h1>
+                        <p class="h2">Online Platform<br>Available Now</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="box">
+        <header class="main-top2 page-header page-header-orange text-white">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-8">
+                        <h1>Get in Touch: Connect with Us | Let's Start the Conversation</h1>
+                        <p>For inquiries or support, contact us anytime</p>
+                        <div class="contact-links">
+                            <a href="mailto:contact@example.com"><i class="fas fa-envelope"></i> Email</a>
+                            <a href="https://www.instagram.com/example"><i class="fab fa-instagram"></i> Instagram</a>
+                            <a href="https://www.linkedin.com/in/example"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a href="https://github.com/example"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

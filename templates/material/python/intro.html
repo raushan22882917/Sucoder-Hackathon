@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Python</title>
+    <!-- Bootstrap CSS (optional) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles for the card */
+        .card {
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #chatbot-box {
+
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 450px;
+            height: 600px;
+            background-color: transparent;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            padding: 10px;
+
+        }
+
+        #close-chatbot {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+            background-color: #dc3545;
+            color: #fff;
+            /* White text color */
+            padding: 10px 20px;
+            /* Padding around the text */
+            border: none;
+            /* No border */
+            border-radius: 5px;
+            /* Rounded corners */
+            cursor: pointer;
+            /* Show pointer cursor on hover */
+            font-size: 16px;
+        }
+
+        /* Button Styles */
+        .chatbot{
+            width:50px;
+            height: 50px;
+            border-radius:50%;
+        }
+    </style>
+</head>
+
+<body>
+    <button type="button" class="btn btn-secondary" onclick="goBack()">Close</button>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Introduction to Python</h5>
+                <p class="card-text">
+                    Python is a high-level, interpreted programming language known for its simplicity and readability.
+                    Guido van Rossum created Python in the late 1980s, and its first official release was in 1991.
+                    Python is designed to be easy to understand and write, emphasizing code readability and allowing
+                    developers to express concepts in fewer lines of code than might be possible in languages like C++
+                    or Java.
+                </p>
+                <p class="card-text">
+                    <strong>Key Features of Python:</strong>
+                <ul>
+                    <li>Readable and Clean Syntax</li>
+                    <li>Versatility</li>
+                    <li>Interpreted Language</li>
+                    <li>Object-Oriented</li>
+                    <li>Large Standard Library</li>
+                    <li>Community and Documentation</li>
+                </ul>
+                </p>
+                <p class="card-text">
+                    <strong>Common Use Cases:</strong>
+                <ul>
+                    <li>Web Development</li>
+                    <li>Data Science and Machine Learning</li>
+                    <li>Automation</li>
+                    <li>Scientific Computing</li>
+                    <li>Game Development</li>
+                </ul>
+                </p>
+                <p class="card-text">
+                    <strong>Getting Started:</strong>
+                <ul>
+                    <li><strong>Installation:</strong> You can download and install Python from the official <a
+                            href="https://www.python.org/" target="_blank">Python website</a>. Python is available for
+                        various operating systems.</li>
+                    <li><strong>Development Environment:</strong> Many developers use Integrated Development
+                        Environments (IDEs) like PyCharm, Visual Studio Code, or Jupyter Notebooks for Python
+                        development.</li>
+                    <li><strong>Learning Resources:</strong> There are numerous online resources, tutorials, and books
+                        available for learning Python. Websites like Codecademy, Real Python, and others offer
+                        interactive Python courses.</li>
+                    <li><strong>Community Engagement:</strong> Engage with the Python community through forums like
+                        Stack Overflow, Reddit (r/python), and local meetups to enhance your learning and get help when
+                        needed.</li>
+                </ul>
+                </p>
+
+
+                <div class="btn-group" style="margin-top: 10px;">
+                    <button type="button" class="btn btn-primary" onclick="startQuiz()">Quiz</button>
+                    <button type="button" class="btn btn-success" onclick="startExercise()">Exercise</button>
+                    <button class="btn btn-primary" style="margin-left: 200px;" onclick="openChatbot()">
+                        <img src="{{ url_for('static', filename='assets/images/chatbot-logo.jpg') }}"
+                            alt="Chatbot Logo" class="chatbot">
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Your custom JavaScript -->
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        function startQuiz() {
+            // Add logic to start the quiz
+            alert("Starting the Quiz!");
+        }
+
+        function startExercise() {
+            // Add logic to start the exercise
+            alert("Starting the Exercise!");
+        }
+
+        function openChatbot() {
+            document.getElementById("chatbot-box").style.display = "block";
+        }
+
+        function closeChatbot() {
+            document.getElementById("chatbot-box").style.display = "none";
+        }
+    </script>
+
+    <!-- Chatbot HTML -->
+    <div id="chatbot-box">
+        <div id="close-chatbot" onclick="closeChatbot()">Close</div>
+        <iframe src="{{ url_for('chatbot')}}" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+    </div>
+</body>
+
+</html>

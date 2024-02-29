@@ -1,0 +1,433 @@
+<!--Website: wwww.codingdung.com-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodingDung | Profile Template</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha384-eD8eB8fXl4PTEKlTO46AqMeIiM9bpYF0drjoGyTTrQGJw8psKnlO1wJge8JDsuI6" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+    <div class="navbar-top">
+        <div class="title">
+            <a href="{{url_for('edit')}}" class="edit-button">Edit Profile</a>
+        </div>
+
+
+        <!-- Navbar -->
+        <ul>
+            <li>
+                <a href="#message">
+                    <span class="icon-count">29</span>
+                    <i class="fa fa-envelope fa-2x"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#notification">
+                    <span class="icon-count">59</span>
+                    <i class="fa fa-bell fa-2x"></i>
+                </a>
+            </li>
+            <li>
+                <a href="{{url_for('home')}}">
+                    <i class="fa fa-sign-out-alt fa-2x"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- End -->
+    </div>
+    <div class="container light-style flex-grow-1 container-p-y">
+        <h4 class="font-weight-bold py-3 mb-4">
+            Account settings
+        </h4>
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0" style="border: 12px solid white;">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list"
+                            href="#account-general" style="border-bottom: 2px dotted black;">General</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-change-password">Change password</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-info">Info</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#work">Work
+                            Experience</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-social-links">Social links</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-connections">Connections</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-notifications">Notifications</a>
+                        <div class="containers">
+                            <h2>Upload Resume</h2>
+                            <div class="upload-btn-wrapper">
+                                <button class="btn">
+                                    <i class="fas fa-upload upload-icon"></i>
+                                    Select File
+                                </button>
+                                <input type="file" name="resume" id="resume" accept=".pdf, .doc, .docx" />
+                                <i class="fas fa-eye eye-icon"></i>
+                                <i class="fas fa-trash delete-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <div class="card-body media align-items-center">
+                                <img id="user-photo" src="{{ url_for('static', filename='assets/images/waal.jpg') }}"
+                                    alt="Image" class="d-block ui-w-80"
+                                    style="border-radius: 50%;border: 3px double rgb(0, 145, 255);">
+
+                                <div class="media-body ml-4">
+                                    <label class="btn btn-outline-primary">
+                                        Upload new photo
+                                        <input type="file" id="file-input" class="account-settings-fileinput">
+                                    </label> &nbsp;
+                                    <button type="button" class="btn btn-default md-btn-flat"
+                                        onclick="resetPhoto()">Reset</button>
+                                    <span id="edit-icon" class="edit-icon" onclick="editPhoto()"></span>
+                                    <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                                </div>
+                            </div>
+
+                            <script>
+                                function editPhoto() {
+                                    const fileInput = document.getElementById('file-input');
+                                    const userPhoto = document.getElementById('user-photo');
+                                    const userId = 'YOUR_USER_ID'; // Replace with the actual user ID
+
+                                    const formData = new FormData();
+                                    formData.append('file', fileInput.files[0]);
+                                    formData.append('user_id', userId);
+
+                                    fetch('/update-photo', {
+                                        method: 'POST',
+                                        body: formData,
+                                    })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            if (data.success) {
+                                                userPhoto.src = data.new_photo_url;
+                                            } else {
+                                                console.error('Failed to update photo');
+                                            }
+                                        })
+                                        .catch(error => console.error(error));
+                                }
+
+                                function resetPhoto() {
+                                    // Implement the reset logic if needed
+                                }
+                            </script>
+
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Username</label>
+                                    <input type="text" class="form-control mb-1" value="Raushan2288">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control" value="Raushan Kumar">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">E-mail</label>
+                                    <input type="text" class="form-control mb-1" value="Raushan2288@mail.com">
+                                    <div class="alert alert-warning mt-3">
+                                        Your email is not confirmed. Please check your inbox.<br>
+                                        <a href="javascript:void(0)">Resend confirmation</a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Company</label>
+                                    <input type="text" class="form-control" value="Company Ltd.">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-change-password">
+                            <div class="card-body pb-2">
+                                <div class="form-group">
+                                    <label class="form-label">Current password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">New password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Repeat new password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-info">
+                            <div class="card-body pb-2">
+                                <div class="form-group">
+                                    <label class="form-label">Bio</label>
+                                    <textarea class="form-control" rows="5">Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit. Mauris nunc arcu, dignissim sit amet sollicitudin iaculis,
+                                        vehicula id urna. Sed luctus urna nunc. Donec fermentum, magna sit amet rutrum
+                                        pretium, turpis dolor molestie diam, ut lacinia diam risus eleifend sapien.
+                                        Curabitur ac nibh nulla. Maecenas nec augue placerat, viverra tellus non,
+                                        pulvinar risus.</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Birthday</label>
+                                    <input type="text" class="form-control" value="May 3, 2003">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Country</label>
+                                    <select class="custom-select">
+                                        <option>USA</option>
+                                        <option>Canada</option>
+                                        <option>UK</option>
+                                        <option>Germany</option>
+                                        <option>France</option>
+                                        <option selected>India</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body pb-2">
+                                <h6 class="mb-4">Contacts</h6>
+                                <div class="form-group">
+                                    <label class="form-label">Phone</label>
+                                    <input type="text" class="form-control" value="+0 (123) 456 7891">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Website</label>
+                                    <input type="text" class="form-control" value>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-social-links">
+                            <div class="card-body pb-2">
+                                <div class="form-group">
+                                    <label class="form-label">Twitter</label>
+                                    <input type="text" class="form-control" value="https://twitter.com/user">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Facebook</label>
+                                    <input type="text" class="form-control" value="https://www.facebook.com/user">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Google+</label>
+                                    <input type="text" class="form-control" value>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">LinkedIn</label>
+                                    <input type="text" class="form-control" value>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Instagram</label>
+                                    <input type="text" class="form-control" value="https://www.instagram.com/user">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="work">
+                            <div class="containe">
+                                <h2>Work Experience</h2>
+                                <div class="form-group">
+                                    <label for="employment-type">Employment Type</label>
+                                    <select id="employment-type" name="employment-type">
+                                        <option value="full-time">Full-time</option>
+                                        <option value="part-time">Part-time</option>
+                                        <option value="contract">Contract</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="designation">Designation</label>
+                                    <select id="designation" name="designation">
+                                        <option value="software-developer">Software Developer</option>
+                                        <option value="project-manager">Project Manager</option>
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sector">Sector</label>
+                                    <select id="sector" name="sector">
+                                        <option value="it">IT</option>
+                                        <option value="finance">Finance</option>
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="organisation">Organisation</label>
+                                    <select id="organisation" name="organisation">
+                                        <option value="company-a">Company A</option>
+                                        <option value="company-b">Company B</option>
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="location">Location</label>
+                                    <input type="text" id="location" name="location">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="duration">Duration</label>
+                                    <div>
+                                        <label for="start-date">Start Date</label>
+                                        <input type="date" id="start-date" name="start-date">
+
+                                        <label for="end-date">End Date</label>
+                                        <input type="date" id="end-date" name="end-date">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="skills">Skills</label>
+                                    <select id="skills" name="skills">
+                                        <option value="agile">Agile</option>
+                                        <option value="full-stack-development">Full Stack Development</option>
+                                        <option value="cloud-computing">Cloud Computing</option>
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </div>
+
+                                <div class="form-group description">
+                                    <label for="experience-description">Description</label>
+                                    <textarea id="experience-description" name="experience-description"
+                                        rows="4"></textarea>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="attachments">Attachments</label>
+                                    <input type="file" id="attachments" name="attachments" multiple>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane fade" id="account-connections">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-twitter">Connect to
+                                    <strong>Twitter</strong></button>
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <h5 class="mb-2">
+                                    <a href="javascript:void(0)" class="float-right text-muted text-tiny"><i
+                                            class="ion ion-md-close"></i> Remove</a>
+                                    <i class="ion ion-logo-google text-google"></i>
+                                    You are connected to Google:
+                                </h5>
+                                <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                    data-cfemail="f9979498818e9c9595b994989095d79a9694">[email&#160;protected]</a>
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-facebook">Connect to
+                                    <strong>Facebook</strong></button>
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-instagram">Connect to
+                                    <strong>Instagram</strong></button>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-notifications">
+                            <div class="card-body pb-2">
+                                <h6 class="mb-4">Activity</h6>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" checked>
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Email me when someone comments on my article</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" checked>
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Email me when someone answers on my forum
+                                            thread</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Email me when someone follows me</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body pb-2">
+                                <h6 class="mb-4">Application</h6>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" checked>
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">News and announcements</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Weekly product updates</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" checked>
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Weekly blog digest</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-right mt-3">
+            <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
+            <button type="button" class="btn btn-default">Cancel</button>
+        </div>
+    </div>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
+</body>
+
+</html>

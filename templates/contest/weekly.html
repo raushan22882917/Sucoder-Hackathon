@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Coding Contest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-HWxUM6RfwcrzS4mMW5EhU3gYdWPIHvTROAg3xDAlmoT5T7qzRLv3Pv7FtEBv9pISpUm1wRlvf2xwlKVgX4Ru0w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='assets/images/problem.jpg') }}");
+            background-repeat: no-repeat;
+            background-size: cover; 
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-image: url("{{ url_for('static', filename='assets/images/problem.jpg') }}");
+            background-repeat: no-repeat;
+            background-size: cover; 
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card, .upcoming-event {
+            background-color: #e2f0ff;
+            border: 1px solid #c3e6f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .card h2, .upcoming-event h2 {
+            margin-top: 0;
+        }
+
+        .card p, .upcoming-event p {
+            margin: 10px 0;
+        }
+
+        .icon {
+            color: #31708f;
+            margin-right: 10px;
+        }
+
+        .upcoming-event {
+            background-color: #dff0d8;
+            border: 1px solid #d0e9c6;
+        }
+        
+        .register-btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        
+        .register-btn:hover {
+            background-color: #45a049;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weekly Coding Contest</h1>
+
+        <div class="card">
+            <h2>Upcoming Event - Week 11</h2>
+            <p><i class="fas fa-calendar icon"></i><strong>Date:</strong> March 3, 2024</p>
+            <p><i class="fas fa-clock icon"></i><strong>Time:</strong> 9:00 AM - 5:00 PM (UTC)</p>
+            <p><i class="fas fa-map-marker-alt icon"></i><strong>Location:</strong> Online</p>
+            <p><i class="fas fa-lightbulb icon"></i><strong>Topic:</strong> Dynamic Programming</p>
+            <a href="#" class="register-btn">Register</a>
+        </div>
+
+        <h2>Past Events</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Week</th>
+                    <th>Date</th>
+                    <th>Topic</th>
+                    <th>Winner</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>10</td>
+                    <td>February 25, 2024</td>
+                    <td>Graph Theory</td>
+                    <td>Raushan Kumar</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>February 18, 2024</td>
+                    <td>String Manipulation</td>
+                    <td>Anshul Sharma</td>
+                </tr>
+                <!-- Add more past events here -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var registerBtn = document.querySelector('.register-btn');
+            registerBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                var message = document.createElement('div');
+                message.textContent = 'Successfully Registered!';
+                message.style.backgroundColor = '#4CAF50';
+                message.style.color = 'white';
+                message.style.padding = '10px 20px';
+                message.style.borderRadius = '5px';
+                message.style.marginBottom = '20px';
+                document.body.insertBefore(message, document.body.firstChild);
+                setTimeout(function() {
+                    message.remove();
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>

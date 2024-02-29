@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Experience Registration</title>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='assets/images/background.jpg') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .see-more-link {
+            display: inline-block;
+            margin-left: 80%;
+            text-decoration: none;
+        }
+
+        .see-more-button {
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #3498db;
+            border: 2px solid #2980b9;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .see-more-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div>
+                <button class="btn btn-outline-primary my-2 my-sm-0" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+            <a href="{{url_for('display_interviews')}}" class="see-more-link">
+                <button class="see-more-button">See Other Experience</button>
+            </a>
+
+        </nav>
+    </header>
+
+    <section class="container mt-5">
+        <h2>Interview Experience Registration</h2>
+        <form id="registrationForm" method="post" action="/submit">
+            <div class="form-group">
+                <label for="userName">Your Name</label>
+                <input type="text" class="form-control" id="userName" name="userName" required>
+            </div>
+            <div class="form-group">
+                <label for="companyName">Company Name</label>
+                <input type="text" class="form-control" id="companyName" name="companyName" required>
+            </div>
+            <div class="form-group">
+                <label for="interviewExperience">Interview Experience</label>
+                <textarea id="interviewExperience" name="interviewExperience"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        tinymce.init({
+            selector: '#interviewExperience',
+            height: 300,
+            plugins: 'advlist autolink lists link image charmap print preview anchor',
+            toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image | charmap',
+        });
+    </script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>

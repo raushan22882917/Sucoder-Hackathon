@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='quiz.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; 
+            color: black;
+            background-image: url("{{ url_for('static', filename='assets/images/quizback.jpg') }}");
+
+        }
+        /* Additional CSS Styles */
+        .top-performers {
+            margin-top: 20px;
+        }
+        .top-performers h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .top-performers .performer {
+            padding: 10px;
+            background-color: #f8d7da; /* Bootstrap danger color for highlighting */
+            border-radius: 5px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .top-performers .performer .rank {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .winner-cup {
+            position: absolute;
+            top: -15px;
+            left: -30px;
+            font-size: 30px;
+            color: #ffbf00; /* Bootstrap warning color for the cup */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Leaderboard</h1>
+        
+        <!-- Search Bar -->
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search by Email" id="searchInput">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" onclick="searchRank()">Search</button>
+            </div>
+        </div>
+
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboardBody">
+                {% for row in leaderboard_data %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td><strong>{{ row[0] }}</strong></td> <!-- Making name bold -->
+                    <td><strong>{{ row[1] }}</strong></td> <!-- Making email bold -->
+                    <td><strong>{{ row[2] }}</strong></td> <!-- Making marks bold -->
+                    {% if loop.index <= 3 %} <!-- Checking if it's a top 3 row -->
+                        <td><i class="fa-sharp fa-solid fa-trophy" style="color: gold;"></i></td> <!-- Adding trophy icon -->
+                    {% else %}
+                        <td></td> <!-- Empty cell for rows beyond top 3 -->
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function searchRank() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("leaderboardBody");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2]; // Email column
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

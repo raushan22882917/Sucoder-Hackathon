@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Submission</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+
+            font-family: 'Arial', sans-serif;
+            background-color: #191919;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        .form-container {
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #151515;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        
+        .btn-submit {
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        
+        .result-message {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #28a745; /* Green color for success message */
+        }
+        
+        /* Optional: Add responsiveness for smaller screens */
+        @media (max-width: 576px) {
+            .container {
+                margin-top: 20px;
+            }
+        
+            .form-container {
+                padding: 15px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ask Question To Our Mentors</h1>
+        <p>
+            This chatbot is designed to assist you with any questions or concerns you may have.
+            Please follow the instructions below to get help from our mentors.
+        </p>
+    
+        <h2>Instructions:</h2>
+        <ol>
+            <li>Enter your question in the provided text area.</li>
+            <li>Select the field related to your question from the dropdown menu.</li>
+            <li>Click the "Submit" button to send your question to our mentors.</li>
+        </ol>
+    
+        <p>
+            Our mentors will receive your question and provide assistance as soon as possible.
+            Thank you for using our chatbot!
+        </p>
+    
+        <!-- Link to Bootstrap JS and jQuery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </div>
+    <div class="container form-container">
+        <form action="/submitemail" method="post">
+            <div class="form-group">
+                <label for="question">Question:</label>
+                <textarea class="form-control" name="question" id="question" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="field">Select Field:</label>
+                <select class="form-control" name="field" id="field" required>
+                    {% for field in fields %}
+                        <option value="{{ field }}">{{ field }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submitemail" class="btn btn-submit">Submit</button>
+        </form>
+    </div>
+    
+    <!-- Link to Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+</body>
+</html>

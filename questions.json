@@ -1,0 +1,58 @@
+[
+    {
+      "id": "q1",
+      "text": "What does the 'print' function do in Python?",
+      "options": [
+        "Displays output on the screen",
+        "Reads user input",
+        "Performs mathematical calculations",
+        "Creates a loop"
+      ],
+      "answer": "Displays output on the screen"
+    },
+    {
+      "id": "q2",
+      "text": "Which of the following is NOT a valid data type in Python?",
+      "options": [
+        "Integer",
+        "List",
+        "StringArray",
+        "Boolean"
+      ],
+      "answer": "StringArray"
+    },
+    {
+      "id": "q3",
+      "text": "What is the result of '5 + 3 * 2' in Python?",
+      "options": [
+        "16",
+        "11",
+        "13",
+        "10"
+      ],
+      "answer": "11"
+    },
+    {
+      "id": "q4",
+      "text": "What does the 'len()' function in Python do?",
+      "options": [
+        "Returns the length of a list",
+        "Performs string concatenation",
+        "Finds the maximum value in a list",
+        "Performs mathematical exponentiation"
+      ],
+      "answer": "Returns the length of a list"
+    },
+    {
+      "id": "q5",
+      "text": "Which keyword is used for function declaration in Python?",
+      "options": [
+        "define",
+        "function",
+        "def",
+        "declare"
+      ],
+      "answer": "def"
+    }
+  ]
+  

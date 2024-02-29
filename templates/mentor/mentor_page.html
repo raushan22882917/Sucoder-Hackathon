@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Doubt Solver</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand img {
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333;
+        }
+
+        /* Main Content Styles */
+        .jumbotron {
+            color: #ffffff;
+            margin-bottom: 30px;
+            /* Added margin bottom */
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .card-text {
+            font-size: 1rem;
+        }
+
+        .image img {
+            max-width: 100%;
+            /* Adjusted image width */
+            height: auto;
+            /* Maintaining aspect ratio */
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        .footer p {
+            margin-bottom: 0;
+        }
+
+        /* Profile and Login Box Styles */
+        .profile-box,
+        .login-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            max-width: 800px;
+            height: 400px;
+            border: 2px solid #ccc;
+            background-color: #fff;
+            overflow: auto;
+            z-index: 1001;
+            display: none;
+        }
+
+        .profile-overlay,
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 750px;
+        }
+
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        /* Close button hover effect */
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Additional Adjustments */
+        iframe {
+            width: 700px;
+            height: 500px;
+            border: none;
+            cursor: pointer;
+        }
+
+        p {
+            color: black;
+            /* Moved to global styles */
+        }
+        .image img{
+            width: 500px;
+            height: 500px;
+        }
+        .contact-availability-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .contact-availability-box h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-availability-box p {
+            margin-bottom: 10px;
+        }
+
+        .contact-availability-box .availability {
+            font-weight: bold;
+            color: green;
+        }
+
+        .contact-availability-box .unavailability {
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='/assets/images/logo.png') }}" width="30" height="30"
+                    class="d-inline-block align-top" alt="">
+                WikiCoding
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('step2')}}"><i class="fas fa-question-circle"></i> give
+                            response</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="openModal()">
+                            <i class="fa-solid fa-dollar-sign"></i>Total Earn
+                        </a>
+                    </li>
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                            <iframe id="iframeContent" width="100%" height="400px" frameborder="0"></iframe>
+                        </div>
+
+                    </div>
+
+                    
+
+
+
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="jumbotron text-center">
+            <div class="container" style="display: flex;">
+                <div>
+                    <p>
+                        "Our platform offers diverse opportunities to monetize your presence. One effective method is
+                        through affiliate marketing, where you can promote products or services relevant to your content
+                        and earn commissions for each sale or referral generated through your unique affiliate links.
+                        Additionally, you can explore advertising partnerships with relevant brands, displaying their
+                        ads on your site to generate revenue through clicks or impressions. Leveraging sponsored content
+                        is another avenue, where companies pay you to create or feature articles, reviews, or videos
+                        related to their offerings. Moreover, you can develop and sell digital products such as eBooks,
+                        courses, or premium content to your audience. Lastly, consider implementing subscription models
+                        or donation systems, allowing your loyal followers to support your work directly. By employing a
+                        combination of these strategies and consistently delivering valuable content, you can
+                        effectively monetize your website and generate sustainable income."
+                    </p>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+    <main>
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="display-4">Welcome to WikiCoding </h1>
+                <p class="lead">Have a coding problem? We've got your back!</p>
+                <a href="{{url_for('step2')}}" class="btn btn-primary"><i class="fas fa-question"></i> Ask a Doubt</a>
+            </div>
+        </section>
+    </main>
+    <div class="contact-availability-box">
+        <h2>Contact & Availability</h2>
+        <p>If you have any questions or need assistance, feel free to contact us using the information below:</p>
+        <p>Email: example@example.com</p>
+        <p>Phone: +123 456 7890</p>
+        <p>Availability: <span class="availability">Available</span></p>
+        <p>Office Hours: Monday to Friday, 9:00 AM to 5:00 PM</p>
+        <p>For urgent inquiries outside office hours, please leave a message or send an email. We'll get back to you as soon as possible.</p>
+    </div>
+
+    <footer class="text-muted text-center">
+        <div class="container">
+            <p>&copy; 2024 WikiCoding. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // JavaScript code
+        $(document).ready(function () {
+            // Function to fetch mentor details when profile link is clicked
+            $('.nav-link-profile').click(function (e) {
+                e.preventDefault(); // Prevent default link behavior
+
+                var userId = "123"; // Replace "123" with the actual user ID
+                fetchMentorDetails(userId);
+
+                // Toggle visibility of profile box
+                $('#profileBox').toggle();
+            });
+
+            // Function to fetch mentor details from the server
+            function fetchMentorDetails(userId) {
+                // Make an AJAX request to fetch mentor details
+                $.ajax({
+                    url: '/get_mentor_details',
+                    type: 'POST',
+                    data: { userId: userId },
+                    success: function (response) {
+                        // Update profile box with mentor details
+                        $('#profileName').text(response.name);
+                        $('#profileUserId').text("User ID: " + response.userId);
+                        $('#profilePhoneNumber').text("Phone Number: " + response.phoneNumber);
+                        $('#profileEmail').text("Email: " + response.email);
+                    },
+                    error: function (error) {
+                        console.log('Error fetching mentor details:', error);
+                    }
+                });
+            }
+        });
+
+    </script>
+
+    <script>
+        function toggleProfile() {
+            var profileOverlay = document.getElementById('profile-overlay');
+            var profileBox = document.getElementById('profile-box');
+            if (profileOverlay.style.display === 'none' || profileBox.style.display === 'none') {
+                profileOverlay.style.display = 'block';
+                profileBox.style.display = 'block';
+            } else {
+                profileOverlay.style.display = 'none';
+                profileBox.style.display = 'none';
+            }
+        }
+        function togglelogin() {
+            var loginOverlay = document.getElementById('login-overlay');
+            var loginBox = document.getElementById('login-box');
+            if (loginOverlay.style.display === 'none' || loginBox.style.display === 'none') {
+                loginOverlay.style.display = 'block';
+                loginBox.style.display = 'block';
+            } else {
+                loginOverlay.style.display = 'none';
+                loginBox.style.display = 'none';
+            }
+        }
+    </script>
+    <script>
+        // Function to open the modal
+        function openModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+            document.getElementById("iframeContent").src = "{{ url_for('show_ratings') }}";
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+            document.getElementById("iframeContent").src = "";
+        }
+    </script>
+</body>
+
+</html>

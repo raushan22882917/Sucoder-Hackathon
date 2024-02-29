@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Learning Progress</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        .container {
+            overflow: auto;
+            height: 700px;
+        }
+
+        .banner {
+            width: 100%;
+            height: 300px;
+            background-color: black;
+            display: flex;
+            background-image: url("{{ url_for('static', filename='assets/images/background.jpg') }}");
+        }
+
+        .image {
+            margin-left: 400px;
+            margin-top: 30px;
+        }
+
+        .navbar {
+            background-color: #3498db;
+        }
+
+        .navbar-brand {
+            color: black;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: black;
+
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: black;
+
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .progress-box {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background-color: #2ecc71;
+            /* Change the progress bar color as needed */
+        }
+
+        .btn-success {
+            background-color: #2ecc71;
+            /* Change the button color as needed */
+            border-color: #2ecc71;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            /* Change the button color as needed */
+            border-color: #3498db;
+        }
+
+        /* Add more styles as needed for your content */
+
+        /* Example media query for responsiveness */
+        @media (max-width: 768px) {
+            .navbar-nav {
+                flex-direction: column;
+            }
+        }
+
+        .chapter-card {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .btn-container button {
+            margin: 5px;
+        }
+
+        .lock-icon {
+            font-size: 24px;
+            color: #28a745;
+            /* Green color for open lock */
+        }
+
+        .star-rating {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .star-rating span {
+            font-size: 24px;
+            color: #ccc;
+            /* Default color for stars */
+            cursor: pointer;
+        }
+
+        .star-rating span.checked {
+            color: #ffc107;
+            /* Yellow color for filled stars */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">WiKiCoding</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#course1">Intro to CS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#course2">Data Structures</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#course3">Comp Networks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#course4">DB Management</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#course5">AI</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#course6">Software Eng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#course7">OS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#course8">Web Dev</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#course9">Cybersecurity</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#course10">ML & DS</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="banner">
+        <div style="margin:50px;">
+            <h2>Python Learning Progress</h2>
+        </div>
+        <div>
+            <img class="image" src="{{ url_for('static', filename='assets/images/python_learning.webp') }}" alt=""
+                width="400px" height="250px" style="margin-top: 40px">
+        </div>
+
+
+
+
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- Chapter 1 Card -->
+            <div class="col-md-4">
+                <div class="chapter-card">
+                    <h3>Chapter 1: Python Basics</h3>
+                    <p>An introduction to the fundamentals of Python programming.</p>
+                    <i class="fas fa-lock-open lock-icon"></i>
+                    <div class="btn-container">
+                        <a href="{{url_for('intro')}}"><button class="btn btn-primary">Start</button></a>
+                        <button class="btn btn-success">Quiz</button>
+                        <button class="btn btn-warning">Exercise</button>
+                    </div>
+                    <div class="star-rating" data-chapter="1">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Repeat the above card structure for other Python chapters -->
+
+            <!-- Chapter 2 Card -->
+            <div class="col-md-4">
+                <div class="chapter-card">
+                    <h3>Chapter 2: Control Flow in Python</h3>
+                    <p>Learn about if statements, loops, and other control flow structures in Python.</p>
+                    <i class="fas fa-lock-open lock-icon"></i>
+                    <div class="btn-container">
+                        <button class="btn btn-primary">Start</button>
+                        <button class="btn btn-success">Quiz</button>
+                        <button class="btn btn-warning">Exercise</button>
+                    </div>
+                    <div class="star-rating" data-chapter="2">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="chapter-card">
+                    <h3>Chapter 2: Control Flow in Python</h3>
+                    <p>Learn about if statements, loops, and other control flow structures in Python.</p>
+                    <i class="fas fa-lock-open lock-icon"></i>
+                    <div class="btn-container">
+                        <button class="btn btn-primary">Start</button>
+                        <button class="btn btn-success">Quiz</button>
+                        <button class="btn btn-warning">Exercise</button>
+                    </div>
+                    <div class="star-rating" data-chapter="2">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="chapter-card">
+                    <h3>Chapter 2: Control Flow in Python</h3>
+                    <p>Learn about if statements, loops, and other control flow structures in Python.</p>
+                    <i class="fas fa-lock-open lock-icon"></i>
+                    <div class="btn-container">
+                        <button class="btn btn-primary">Start</button>
+                        <button class="btn btn-success">Quiz</button>
+                        <button class="btn btn-warning">Exercise</button>
+                    </div>
+                    <div class="star-rating" data-chapter="2">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="chapter-card">
+                    <h3>Chapter 2: Control Flow in Python</h3>
+                    <p>Learn about if statements, loops, and other control flow structures in Python.</p>
+                    <i class="fas fa-lock-open lock-icon"></i>
+                    <div class="btn-container">
+                        <button class="btn btn-primary">Start</button>
+                        <button class="btn btn-success">Quiz</button>
+                        <button class="btn btn-warning">Exercise</button>
+                    </div>
+                    <div class="star-rating" data-chapter="2">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="chapter-card">
+                    <h3>Chapter 2: Control Flow in Python</h3>
+                    <p>Learn about if statements, loops, and other control flow structures in Python.</p>
+                    <i class="fas fa-lock-open lock-icon"></i>
+                    <div class="btn-container">
+                        <button class="btn btn-primary">Start</button>
+                        <button class="btn btn-success">Quiz</button>
+                        <button class="btn btn-warning">Exercise</button>
+                    </div>
+                    <div class="star-rating" data-chapter="2">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="chapter-card">
+                    <h3>Chapter 2: Control Flow in Python</h3>
+                    <p>Learn about if statements, loops, and other control flow structures in Python.</p>
+                    <i class="fas fa-lock-open lock-icon"></i>
+                    <div class="btn-container">
+                        <button class="btn btn-primary">Start</button>
+                        <button class="btn btn-success">Quiz</button>
+                        <button class="btn btn-warning">Exercise</button>
+                    </div>
+                    <div class="star-rating" data-chapter="2">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="chapter-card">
+                    <h3>Chapter 2: Control Flow in Python</h3>
+                    <p>Learn about if statements, loops, and other control flow structures in Python.</p>
+                    <i class="fas fa-lock-open lock-icon"></i>
+                    <div class="btn-container">
+                        <button class="btn btn-primary">Start</button>
+                        <button class="btn btn-success">Quiz</button>
+                        <button class="btn btn-warning">Exercise</button>
+                    </div>
+                    <div class="star-rating" data-chapter="2">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="chapter-card">
+                    <h3>Chapter 2: Control Flow in Python</h3>
+                    <p>Learn about if statements, loops, and other control flow structures in Python.</p>
+                    <i class="fas fa-lock-open lock-icon"></i>
+                    <div class="btn-container">
+                        <button class="btn btn-primary">Start</button>
+                        <button class="btn btn-success">Quiz</button>
+                        <button class="btn btn-warning">Exercise</button>
+                    </div>
+                    <div class="star-rating" data-chapter="2">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                    </div>
+                </div>
+            </div>
+            
+
+            
+
+
+
+            
+
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const stars = document.querySelectorAll('.star');
+
+                    stars.forEach(star => {
+                        star.addEventListener('click', () => {
+                            const chapter = star.parentNode.dataset.chapter;
+                            const rating = star.dataset.rating;
+
+                            // Remove 'checked' class from all stars in the same chapter
+                            document.querySelectorAll(`.star-rating[data-chapter="${chapter}"] .star`).forEach(s => {
+                                s.classList.remove('checked');
+                            });
+
+                            // Add 'checked' class to the clicked star and previous stars in the same chapter
+                            star.classList.add('checked');
+                            let prevStar = star.previousElementSibling;
+                            while (prevStar) {
+                                prevStar.classList.add('checked');
+                                prevStar = prevStar.previousElementSibling;
+                            }
+                        });
+                    });
+                });
+            </script>
+
+</body>
+
+</html>

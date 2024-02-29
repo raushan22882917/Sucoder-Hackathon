@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Interview Prep</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .landing {
+            background-color: #191919;
+            color: black;
+            padding: 180px 0;
+            text-align: center;
+            background-image: url("{{ url_for('static', filename='assets/images/interviewback.jpeg') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .landing h1 {
+            font-size: 2.5rem;
+        }
+
+        .landing p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        footer {
+            background-color: black;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .navbar-nav .dropdown-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-nav .dropdown-item i {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">WiKiCoding</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#landing">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="companyDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Practice Problems
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="companyDropdown">
+                            <a class="dropdown-item" href="{{url_for('coding')}}">
+                                <i class="fas fa-lightbulb"></i> All Companies Question
+                            </a>
+                            <a class="dropdown-item" href="#top-companies">
+                                <i class="fas fa-star"></i> Top Companies Question
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="interviewDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mock Interview
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="interviewDropdown">
+                            <a class="dropdown-item" href="https://grow.google/certificates/interview-warmup/">
+                                <i class="fas fa-certificate"></i> Free
+                            </a>
+                            <a class="dropdown-item" href="{{url_for('one')}}">
+                                <i class="fas fa-user"></i> One-to-One
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-users"></i> Group
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('registration_form')}}">Share Interview Experience</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+
+    <!-- ... Previous code ... -->
+
+    <section id="landing" class="landing">
+        <div class="container">
+            <h1>Welcome to WiKiCoding</h1>
+            <p>Your ultimate platform for coding interview preparation.</p>
+            <a href="#articles" class="btn btn-primary">Practice Coding Problems</a>
+            <a href="#mock-interview" class="btn btn-secondary">Simulate a Coding Interview</a>
+            <a href="#community-forum" class="btn btn-info">Join the Coding Community</a>
+
+            <!-- Banners -->
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="banner free">
+                        <h3>Free</h3>
+                        <p>Access a wide range of resources at no cost.</p>
+                        <a href="https://grow.google/certificates/interview-warmup/">
+                            <button class="btn btn-primary">Practice With Google</button></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="banner one-to-one">
+                        <h3>One-to-One</h3>
+                        <p>Get personalized guidance with individual sessions.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="banner group">
+                        <h3>Group</h3>
+                        <p>Participate in collaborative interview sessions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <footer class="footer">
+        <div class="contact-info">
+            <p>Email: WiKiCoding@WiKiCoding.com</p>
+            <p>Phone: (123) 456-7890</p>
+        </div>
+
+        <div class="social-links">
+            <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
